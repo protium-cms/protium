@@ -1,0 +1,25 @@
+{
+  "name": "protium",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Jon Jaques <jaquers@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "ts-node-dev": "^1.0.0-pre.32"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "dev": "tsnd src/index.ts",
+    "start": "ts-node -T src/index.ts",
+    "test": "jest"
+  }
+}
