@@ -1,0 +1,19 @@
+image: node:10.14.2
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - bootstrap
+  - test
+
+install dependencies:
+  stage: bootstrap
+  script:
+    - yarn
+
+unit tests:
+  stage: test
+  script:
+    - yarn test
