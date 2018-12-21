@@ -1,12 +1,8 @@
 {
-  "name": "protium",
+  "name": "@protium/web",
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "engines": {
     "node": "10.14.2",
     "yarn": "1.12.3"
@@ -20,11 +16,9 @@
     "ts-jest": "^23.10.5",
     "ts-node-dev": "^1.0.0-pre.32"
   },
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "dev": "tsnd packages/serve/index.ts",
-    "start": "ts-node -T packages/serve/index.ts",
-    "test": "jest",
-    "test:ci": "jest --ci --coverage"
+  "dependencies": {
+    "express": "^4.16.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }

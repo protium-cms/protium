@@ -11,4 +11,5 @@ test:
   stage: test
   script:
     - yarn
+    - yarn bootstrap
     - yarn test:ci

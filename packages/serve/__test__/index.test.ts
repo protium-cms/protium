@@ -1,7 +1,7 @@
-jest.mock('../app.ts')
+jest.mock('@protium/web')
 
-import app from '../app'
-import '../index'
+import app from '@protium/web'
+import '../'
 
 describe('entrypoint', () => {
   it('should start up', () => {
