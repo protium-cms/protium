@@ -5,15 +5,10 @@ cache:
     - node_modules/
 
 stages:
-  - bootstrap
   - test
 
-install dependencies:
-  stage: bootstrap
-  script:
-    - yarn
-
-unit tests:
+test:
   stage: test
   script:
+    - yarn
     - yarn test:ci
