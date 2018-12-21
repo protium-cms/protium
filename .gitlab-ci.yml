@@ -16,4 +16,4 @@ install dependencies:
 unit tests:
   stage: test
   script:
-    - yarn test
+    - yarn test:ci

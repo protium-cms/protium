@@ -24,6 +24,7 @@
   "scripts": {
     "dev": "tsnd src/index.ts",
     "start": "ts-node -T src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "jest --ci --coverage"
   }
 }
