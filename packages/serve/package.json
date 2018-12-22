@@ -3,15 +3,17 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
+  "main": "index.js",
   "engines": {
     "node": "10.14.2",
     "yarn": "1.12.3"
   },
   "devDependencies": {
     "jest": "^23.6.0",
-    "lerna": "^3.8.0",
     "ts-jest": "^23.10.5",
-    "ts-node-dev": "^1.0.0-pre.32"
+    "ts-node-dev": "^1.0.0-pre.32",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18"
   },
   "dependencies": {
     "express": "^4.16.4",
@@ -19,9 +21,8 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "dev": "tsnd src/index.ts",
-    "start": "ts-node -T src/index.ts",
-    "test": "jest",
-    "test:ci": "jest --ci --coverage"
+    "build": "tsc",
+    "dev": "tsnd index.ts",
+    "start": "node index.js"
   }
 }
