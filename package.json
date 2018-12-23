@@ -25,7 +25,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "build-image": "yarn clean && docker build .",
-    "build-ci-image": "docker build -f Dockerfile.ci -t registry.gitlab.com/protium-network/protium/ci-runner .",
+    "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
     "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner",
     "dev": "lerna run dev --parallel",
     "start": "lerna run start --parallel",
