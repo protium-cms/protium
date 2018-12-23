@@ -1,4 +1,7 @@
-image: node:10.14.2
+image: registry.gitlab.com/protium-network/protium/ci-runner
+
+services:
+  - docker:dind
 
 cache:
   paths:
