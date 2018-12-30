@@ -7,8 +7,8 @@ variables:
   DOCKER_DRIVER: overlay2
   GCLOUD_IMAGE: $GCLOUD_REGISTRY/$CI_PROJECT_PATH
   CONTAINER_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH
-  CONTAINER_TEST_IMAGE: $CONTAINER_IMAGE:$CI_COMMIT_REF_SLUG
-  CONTAINER_RELEASE_IMAGE: $CONTAINER_IMAGE:latest
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:latest
 
 cache:
   key: $CI_COMMIT_REF_SLUG
@@ -47,12 +47,12 @@ stages:
   stage: build
   before_script:
     - echo $GCLOUD_SERVICE_KEY > $HOME/gcloud-service-key.json
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY < $CI_JOB_TOKEN
+    - docker login -u _json_key --password-stdin $GCLOUD_REGISTRY < $HOME/gcloud-service-key.json
     - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
-    - gcloud auth configure-docker
   script:
     - docker pull $CONTAINER_RELEASE_IMAGE
-    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $GCLOUD_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
