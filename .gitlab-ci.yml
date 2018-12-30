@@ -36,7 +36,7 @@ stages:
   allow_failure: true
   stage: test
   script:
-    - yarn lint
+    - yarn lint:ci
   artifacts:
     reports:
       junit: report-lint.xml
