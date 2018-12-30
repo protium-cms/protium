@@ -16,21 +16,21 @@ stages:
   - test
   - build
 
-install_project:
+"Install Dependencies":
   stage: setup
   script:
     - yarn
     - yarn bootstrap
-  artifacts:
-    paths:
-      - node_modules/
+  # artifacts:
+  #   paths:
+  #     - node_modules/
 
-lint_project:
+"Lint":
   stage: test
   script:
     - yarn lint
 
-test_project:
+"Unit Tests":
   stage: test
   script:
     - yarn test:ci
@@ -38,7 +38,7 @@ test_project:
     paths:
       - coverage/
 
-build_app:
+"Build Image":
   stage: build
   # before_script:
   #   - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
@@ -46,6 +46,7 @@ build_app:
   #   - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/gcloud-service-key.json
   script:
     - docker build -t registry.gitlab.com/protium-network/protium .
+    - docker push registry.gitlab.com/protium-network/protium:latest
   only:
     refs:
       - master
