@@ -5,8 +5,8 @@
   "license": "MIT",
   "main": "index.js",
   "engines": {
-    "node": ">=10.15.0",
-    "yarn": "1.12.3"
+    "node": ">=10",
+    "yarn": ">=1.7"
   },
   "devDependencies": {
     "jest": "^23.6.0",

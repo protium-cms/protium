@@ -8,8 +8,8 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=10.15.0",
-    "yarn": "1.12.3"
+    "node": ">=10",
+    "yarn": ">=1.7"
   },
   "dependencies": {
     "lerna": "^3.8.0",
@@ -26,7 +26,7 @@
     "build": "lerna run build",
     "build-image": "yarn clean && docker build .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
-    "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner",
+    "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",
     "dev": "lerna run dev --parallel",
     "start": "lerna run start --parallel",
     "test": "jest",
