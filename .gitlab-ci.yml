@@ -5,13 +5,14 @@ services:
 variables:
   DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2
+  CACHE_KEY: $CI_COMMIT_REF_SLUG
   GCLOUD_IMAGE: $GCLOUD_REGISTRY/$CI_PROJECT_PATH
   CONTAINER_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH
   CONTAINER_TEST_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_SLUG
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:latest
 
 cache:
-  key: $CI_COMMIT_REF_SLUG
+  key: $CACHE_KEY
   paths:
     - "node_modules/"
     - "packages/**/node_modules/"
@@ -32,6 +33,7 @@ stages:
   script:
     - yarn audit
   cache:
+    key: $CACHE_KEY
     policy: pull
 
 "Lint":
@@ -40,6 +42,7 @@ stages:
   script:
     - yarn lint:ci
   cache:
+    key: $CACHE_KEY
     policy: pull
   artifacts:
     reports:
@@ -50,6 +53,7 @@ stages:
   script:
     - yarn test:ci
   cache:
+    key: $CACHE_KEY
     policy: pull
   artifacts:
     reports:
