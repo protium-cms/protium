@@ -5,3 +5,4 @@ yarn-error.log
 packages/**/*.js
 secrets.yaml
 keys
+junit.xml

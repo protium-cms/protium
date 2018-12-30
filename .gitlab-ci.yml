@@ -26,11 +26,14 @@ stages:
   script:
     - yarn
     - yarn bootstrap
-  # artifacts:
-  #   paths:
-  #     - node_modules/
+
+"Audit Dependencies":
+  stage: test
+  script:
+    - yarn audit
 
 "Lint":
+  allow_failure: true
   stage: test
   script:
     - yarn lint
@@ -40,7 +43,10 @@ stages:
   script:
     - yarn test:ci
   artifacts:
+    reports:
+      junit: junit.xml
     paths:
+      - junit.xml
       - coverage/
 
 "Build Image":
