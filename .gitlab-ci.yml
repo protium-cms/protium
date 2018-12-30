@@ -46,3 +46,6 @@ build_app:
   #   - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/gcloud-service-key.json
   script:
     - docker build -t registry.gitlab.com/protium-network/protium .
+  only:
+    refs:
+      - master
