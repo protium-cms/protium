@@ -18,7 +18,6 @@ cache:
 
 stages:
   - setup
-  - lint
   - test
 
 install:
@@ -31,7 +30,7 @@ install:
       - node_modules/
 
 lint:
-  stage: lint
+  stage: test
   script:
     - yarn lint
 
