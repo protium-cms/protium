@@ -36,7 +36,10 @@ stages:
   allow_failure: true
   stage: test
   script:
-    - yarn lint
+    - yarn lint:ci
+  artifacts:
+    reports:
+      junit: report-lint.xml
 
 "Unit Tests":
   stage: test
@@ -44,10 +47,7 @@ stages:
     - yarn test:ci
   artifacts:
     reports:
-      junit: junit.xml
-    paths:
-      - junit.xml
-      - coverage/
+      junit: report-unit-tests.xml
 
 "Build Image":
   stage: build
