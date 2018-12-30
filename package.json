@@ -18,7 +18,8 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
-    "tslint": "^5.12.0"
+    "tslint": "^5.12.0",
+    "tslint-junit-formatter": "^5.1.0"
   },
   "scripts": {
     "clean": "rimraf \"packages/!(node_modules)**/*.js\"",
@@ -30,10 +31,11 @@
     "push-image": "docker push registry.gitlab.com/protium-network/protium:latest",
     "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",
     "dev": "lerna run dev --parallel",
-    "lint": "tslint --project .",
+    "lint": "tslint -c tslint.json 'packages/**/*.{ts,tsx}'",
+    "lint:ci": "tslint --formatters-dir node_modules/tslint-junit-formatter/formatters --format junit --out report-lint.xml -c tslint.json 'packages/**/*.{ts,tsx}'",
     "start": "lerna run start --parallel",
     "test": "jest",
-    "test:ci": "JEST_SUITE_NAME='Unit Tests' jest --ci --coverage --reporters=default --reporters=jest-junit",
+    "test:ci": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci --coverage --reporters=default --reporters=jest-junit",
     "release": "echo 'disabled for now'",
     "release:debug": "helm install --name test --devel --dry-run --debug ./chart"
   }

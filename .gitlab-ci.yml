@@ -37,6 +37,9 @@ stages:
   stage: test
   script:
     - yarn lint
+  artifacts:
+    reports:
+      junit: report-lint.xml
 
 "Unit Tests":
   stage: test
@@ -44,10 +47,7 @@ stages:
     - yarn test:ci
   artifacts:
     reports:
-      junit: junit.xml
-    paths:
-      - junit.xml
-      - coverage/
+      junit: report-unit-tests.xml
 
 "Build Image":
   stage: build

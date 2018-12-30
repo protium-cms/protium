@@ -7,4 +7,8 @@ describe('entrypoint', () => {
   it('should start up', () => {
     expect(app.listen).toHaveBeenCalled()
   })
+
+  it('should fail', () => {
+    expect(1).toBe(2)
+  })
 })
