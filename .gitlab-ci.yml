@@ -14,8 +14,8 @@ variables:
 cache:
   key: $CACHE_KEY
   paths:
-    - "*/node_modules"
-    - "*/packages/*/node_modules"
+    - "node_modules/"
+    - "packages/*/node_modules/"
 
 stages:
   - setup
