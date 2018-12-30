@@ -47,7 +47,8 @@ stages:
   stage: build
   before_script:
     - echo $GCLOUD_SERVICE_KEY > $HOME/gcloud-service-key.json
-    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY < $CI_JOB_TOKEN
+    - echo $CI_JOB_TOKEN > $HOME/.ci-job-token
+    - docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY < $HOME/.ci-job-token
     - docker login -u _json_key --password-stdin $GCLOUD_REGISTRY < $HOME/gcloud-service-key.json
     - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
   script:
