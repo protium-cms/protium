@@ -15,21 +15,23 @@ RUN apk add --update --no-cache \
   bash \
   curl \
   ca-certificates \
-  libgcc \
-  libstdc++ \
-  linux-headers \
   gcc \
   gettext \
   gnupg \
   gzip \
   g++ \
+  jq \
+  libgcc \
+  libstdc++ \
+  linux-headers \
   make \
   python \
   tar \
   xz
 
 # install latest node deps
-RUN apk add nodejs npm yarn --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main
+RUN apk add nodejs --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main
+RUN apk add yarn --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 # install google cloud sdk
 RUN curl -fsSL --compressed -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$CLOUD_SDK_VERSION-linux-x86_64.tar.gz" \

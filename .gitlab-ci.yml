@@ -8,20 +8,34 @@ variables:
   DOCKER_DRIVER: overlay2
 
 before_script:
-  - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-  - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-  - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/gcloud-service-key.json
+  # - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+  # - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+  # - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/gcloud-service-key.json
 
 cache:
   paths:
     - node_modules/
 
 stages:
+  - setup
+  - lint
   - test
+
+install:
+  stage: setup
+  script:
+    - yarn
+    - yarn bootstrap
+  artifacts:
+    paths:
+      - node_modules/
+
+lint:
+  stage: lint
+  script:
+    - yarn lint
 
 test:
   stage: test
   script:
-    - yarn
-    - yarn bootstrap
-    - yarn test:ci
+    - yarn test

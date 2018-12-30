@@ -1,8 +1,8 @@
-import Express from 'express'
+import Express from "express";
 
-const app = Express()
-export default app
+const app = Express();
+export default app;
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.get("/", (req, res) => {
+  res.send("hello world");
+});

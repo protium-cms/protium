@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:lts-alpine
 
 # reaps zombie processes and forwards sigterm,sigint
 # https://github.com/krallin/tini
