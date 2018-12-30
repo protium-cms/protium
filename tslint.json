@@ -5,7 +5,7 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-console": true
+    "no-console": false
   },
   "rulesDirectory": [],
   "linterOptions": {"exclude": ["node_modules/**/*"]}
