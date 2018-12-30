@@ -4,9 +4,11 @@
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "engines": {
     "node": ">=10",
     "yarn": ">=1.7"
@@ -16,6 +18,10 @@
     "rimraf": "^2.6.2"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
     "tslint": "^5.12.0",

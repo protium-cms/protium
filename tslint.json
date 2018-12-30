@@ -4,9 +4,14 @@
     "tslint:recommended"
   ],
   "jsRules": {},
-  "rules": {
-    "no-console": false
+  "linterOptions": {
+    "exclude": ["node_modules/**/*"]
   },
-  "rulesDirectory": [],
-  "linterOptions": {"exclude": ["node_modules/**/*"]}
+  "rules": {
+    "no-console": false,
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single"],
+    "space-before-function-paren": [true, "always"]
+  },
+  "rulesDirectory": []
 }

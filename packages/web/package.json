@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
   "engines": {
     "node": ">=10",
     "yarn": ">=1.7"
@@ -20,7 +21,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "test:ci": "jest --ci --coverage"
+    "test": "jest"
   }
 }

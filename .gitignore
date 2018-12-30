@@ -1,8 +1,8 @@
 node_modules
 coverage
+dist
+keys
 .env
 yarn-error.log
-packages/**/*.js
 secrets.yaml
-keys
 report*.xml

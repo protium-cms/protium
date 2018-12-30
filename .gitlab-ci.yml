@@ -31,12 +31,16 @@ stages:
   stage: test
   script:
     - yarn audit
+  cache:
+    policy: pull
 
 "Lint":
   allow_failure: true
   stage: test
   script:
     - yarn lint:ci
+  cache:
+    policy: pull
   artifacts:
     reports:
       junit: report-lint.xml
@@ -45,6 +49,8 @@ stages:
   stage: test
   script:
     - yarn test:ci
+  cache:
+    policy: pull
   artifacts:
     reports:
       junit: report-unit-tests.xml
@@ -64,6 +70,8 @@ stages:
     - docker tag $CONTAINER_TEST_IMAGE $GCLOUD_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
     - docker push $GCLOUD_IMAGE
+  # cache:
+  #   policy: pull
   only:
     refs:
       - master
