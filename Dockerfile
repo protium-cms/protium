@@ -6,6 +6,9 @@ ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
+# install git so we can patch packages
+RUN apk add --update git
+
 # run nodejs in production mode
 # to be overridden in development
 ARG NODE_ENV=production
@@ -25,9 +28,10 @@ COPY package.json .
 COPY lerna.json .
 COPY tsconfig.json .
 COPY yarn.lock .
+COPY patches .
 
 # app code
-COPY packages ./packages
+COPY packages .
 
 # install dependencies and compile to js
 RUN yarn

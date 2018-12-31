@@ -14,6 +14,8 @@
     "yarn": ">=1.7"
   },
   "dependencies": {
+    "patch-package": "^5.1.1",
+    "postinstall-postinstall": "^2.0.0",
     "lerna": "^3.8.0",
     "rimraf": "^2.6.2"
   },
@@ -24,10 +26,6 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
-    "jest-runner-tsc": "^1.3.2",
-    "patch-package": "^5.1.1",
-    "postinstall-postinstall": "^2.0.0",
-    "react-native": "0.55.4",
     "tslint": "^5.12.0",
     "tslint-junit-formatter": "^5.1.0"
   },
@@ -40,9 +38,8 @@
     "clean-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "build-image": "yarn clean && docker build -t registry.gitlab.com/protium-network/protium .",
+    "build-image": "yarn clean && docker build --no-cache .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
-    "push-image": "docker push registry.gitlab.com/protium-network/protium:latest",
     "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",
     "dev": "lerna run dev --parallel",
     "lint": "tslint -c tslint.json 'packages/**/*.{ts,tsx}'",
