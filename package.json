@@ -32,7 +32,8 @@
     "tslint-junit-formatter": "^5.1.0"
   },
   "resolutions": {
-    "lodash": "4.17.10"
+    "lodash": "4.17.10",
+    "react-devtools-core": "3.4.2"
   },
   "scripts": {
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/dist\" \"packages/**/node_modules\"",
