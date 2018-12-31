@@ -1,9 +1,10 @@
-jest.mock('@protium/web')
-jest.mock('@protium/api')
+jest.mock('@protium/api/src')
+jest.mock('@protium/web/src')
 
-import api from '@protium/api'
-import app from '@protium/web'
-import '.'
+import api from '@protium/api/src'
+import app from '@protium/web/src'
+
+import './index'
 
 describe('entrypoint', () => {
   it('app should start up', () => {

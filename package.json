@@ -30,7 +30,7 @@
     "tslint-junit-formatter": "^5.1.0"
   },
   "scripts": {
-    "clean": "rimraf \"packages/!(node_modules)**/*.js\"",
+    "clean": "rimraf \"packages/**/dist\"",
     "clean-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",

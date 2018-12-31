@@ -1,6 +1,6 @@
 const Fs = require('fs')
 const Path = require('path')
-const { defaults: tsJest } = require('ts-jest/presets');
+const { defaults: tsJest } = require('ts-jest/presets')
 
 const globalConfig = module.exports = {
   cacheDirectory: '.jest/cache',
@@ -15,6 +15,10 @@ const globalConfig = module.exports = {
 function configureProject (pkg) {
   let c = {
     displayName: pkg,
+    // moduleNameMapper: {
+    //   '^@protium/([\\w-]+)$': '<rootDir>/packages/$1/src',
+    //   '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/src$2',
+    // },
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),
@@ -31,6 +35,7 @@ function configureProject (pkg) {
       ...tsJest,
       preset: 'react-native',
       displayName: c.displayName,
+      moduleNameMapper: c.moduleNameMapper,
       globals: c.globals,
       testMatch: c.testMatch,
       setupFiles: [

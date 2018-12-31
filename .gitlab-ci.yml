@@ -15,7 +15,10 @@ cache:
   key: $CACHE_KEY
   paths:
     - "node_modules/"
-    - "packages/*/node_modules/"
+    - "packages/api/node_modules/"
+    - "packages/app/node_modules/"
+    - "packages/serve/node_modules/"
+    - "packages/web/node_modules/"
 
 stages:
   - setup
@@ -29,6 +32,7 @@ stages:
     - yarn bootstrap
 
 "Audit Dependencies":
+  allow_failure: true
   stage: test
   script:
     - yarn audit

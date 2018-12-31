@@ -1,5 +1,5 @@
-import api from '@protium/api'
-import app from '@protium/web'
+import api from '@protium/api/src'
+import app from '@protium/web/src'
 
 const port = process.env.PORT || 3000
 const apiPort = process.env.API_PORT || 3001

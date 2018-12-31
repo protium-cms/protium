@@ -5,24 +5,15 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "composite": true,
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@protium/*": [
-        "packages/*"
-      ]
-    }
   },
   "exclude": [
     "**/*.test.ts",
     "**/*.test.tsx",
-    "packages/*/dist",
-    "node_modules"
   ]
 }
