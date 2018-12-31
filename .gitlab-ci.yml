@@ -49,6 +49,7 @@ stages:
 "Unit Tests":
   stage: test
   script:
+    - yarn build
     - yarn test:ci
   artifacts:
     reports:
