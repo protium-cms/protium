@@ -17,6 +17,7 @@ RUN apk add --update --no-cache \
   ca-certificates \
   gcc \
   gettext \
+  git \
   gnupg \
   gzip \
   g++ \
