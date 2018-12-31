@@ -9,10 +9,6 @@
     "node": ">=10",
     "yarn": ">=1.7"
   },
-  "devDependencies": {
-    "ts-node": "^7.0.1",
-    "@types/jest": "^23.3.10"
-  },
   "dependencies": {
     "@protium/app": "^0.0.1",
     "@types/express": "^4.16.0",
@@ -21,7 +17,6 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "build": "tsc -b",
-    "test": "jest"
+    "build": "tsc -p tsconfig.build.json"
   }
 }

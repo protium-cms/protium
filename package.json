@@ -4,30 +4,27 @@
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
-  "engines": {
-    "node": ">=10",
-    "yarn": ">=1.7"
-  },
   "dependencies": {
+    "lerna": "^3.8.0",
     "patch-package": "^5.1.1",
     "postinstall-postinstall": "^2.0.0",
-    "lerna": "^3.8.0",
     "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.10",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",
     "tslint-junit-formatter": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=10",
+    "yarn": ">=1.7"
   },
   "resolutions": {
     "lodash": "4.17.10",
@@ -35,8 +32,8 @@
   },
   "scripts": {
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/dist\" \"packages/**/node_modules\"",
-    "clean-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "bootstrap": "lerna bootstrap",
+    "clean-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "bootstrap": "yarn && lerna bootstrap",
     "build": "lerna run build",
     "build-image": "yarn clean && docker build --no-cache .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
@@ -50,5 +47,10 @@
     "release": "echo 'disabled for now'",
     "release:debug": "helm install --name test --devel --dry-run --debug ./chart",
     "postinstall": "patch-package"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   }
 }

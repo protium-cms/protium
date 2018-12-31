@@ -13,15 +13,10 @@
     "skipLibCheck": true,
     "baseUrl": "packages",
     "paths": {
-      "@protium/api*": ["api/src*", "api/src"],
-      "@protium/app*": ["app/src*", "app/src"],
-      "@protium/serve*": ["serve/src*", "serve/src"],
-      "@protium/web*": ["web/src*", "web/src"]
+      "@protium/api": ["api/src"],
+      "@protium/app": ["app/src"],
+      "@protium/serve": ["serve/src"],
+      "@protium/web": ["web/src"]
     }
-  },
-  "exclude": [
-    "**/dist",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  }
 }

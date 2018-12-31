@@ -1,9 +1,8 @@
-import {api} from '@protium/api'
-import {app} from '@protium/web'
-
 jest.mock('@protium/api', () => ({api: {listen: jest.fn()}}))
 jest.mock('@protium/web', () => ({app: {listen: jest.fn()}}))
 
+import {api} from '@protium/api'
+import {app} from '@protium/web'
 import '.'
 
 describe('entrypoint', () => {

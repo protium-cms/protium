@@ -3,18 +3,15 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/serve/src/index.js",
   "source": "src/index.ts",
   "engines": {
     "node": ">=10",
     "yarn": ">=1.7"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.5",
-    "ts-node": "^7.0.1",
-    "ts-node-dev": "^1.0.0-pre.32"
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tsconfig-paths": "^3.7.0"
   },
   "dependencies": {
     "@protium/api": "^0.0.1",
@@ -24,9 +21,8 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "build": "tsc -b",
-    "test": "jest",
-    "dev": "tsnd src/index.ts",
-    "start": "node dist/index.js"
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsnd -r tsconfig-paths/register --prefer-ts src/index.ts",
+    "start": "node dist/serve/src/index.js"
   }
 }

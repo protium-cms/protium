@@ -9,10 +9,6 @@
     "node": ">=10",
     "yarn": ">=1.7"
   },
-  "devDependencies": {
-    "ts-node": "^7.0.1",
-    "@types/jest": "^23.3.10"
-  },
   "dependencies": {
     "express": "^4.16.4",
     "typescript": "^3.2.2",
@@ -20,7 +16,6 @@
     "@types/node": "^10.12.18"
   },
   "scripts": {
-    "build": "tsc -b",
-    "test": "jest"
+    "build": "tsc -p tsconfig.build.json"
   }
 }
