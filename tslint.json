@@ -5,7 +5,10 @@
   ],
   "jsRules": {},
   "linterOptions": {
-    "exclude": ["node_modules/**/*"]
+    "exclude": [
+      "**/node_modules",
+      "**/dist"
+    ]
   },
   "rules": {
     "no-console": false,

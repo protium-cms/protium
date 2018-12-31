@@ -1,8 +1,8 @@
-jest.mock('@protium/api/src')
-jest.mock('@protium/web/src')
+jest.mock('@protium/api')
+jest.mock('@protium/web')
 
-import api from '@protium/api/src'
-import app from '@protium/web/src'
+import api from '@protium/api'
+import app from '@protium/web'
 
 import './index'
 

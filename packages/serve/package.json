@@ -13,6 +13,7 @@
     "@types/jest": "^23.3.10",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
     "ts-node-dev": "^1.0.0-pre.32"
   },
   "dependencies": {
@@ -20,7 +21,6 @@
     "@protium/web": "^0.0.1",
     "@types/node": "^10.12.18",
     "express": "^4.16.4",
-    "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
   },
   "scripts": {

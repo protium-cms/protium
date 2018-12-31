@@ -31,7 +31,7 @@ COPY packages ./packages
 
 # install dependencies and compile to js
 RUN yarn
-RUN yarn lerna bootstrap
+RUN yarn bootstrap
 RUN yarn build
 
 ENTRYPOINT ["/tini", "--"]
