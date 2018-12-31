@@ -1,7 +1,7 @@
-import app from '.'
+import {api} from '.'
 
-describe('app', () => {
+describe('api', () => {
   it('should export an express-like object', () => {
-    expect(typeof app.get).toBe('function')
+    expect(typeof api.get).toBe('function')
   })
 })

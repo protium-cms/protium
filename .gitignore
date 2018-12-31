@@ -371,3 +371,4 @@ keys
 .env
 secrets.yaml
 report*.xml
+.jest

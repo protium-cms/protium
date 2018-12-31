@@ -20,7 +20,7 @@
     "@types/node": "^10.12.18"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "test": "jest"
   }
 }

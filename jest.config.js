@@ -1,50 +1,55 @@
 const Fs = require('fs')
 const Path = require('path')
-const { defaults: tsJest } = require('ts-jest/presets')
+const {defaults: tsJest} = require('ts-jest/presets')
+
+const projects = Fs.readdirSync(Path.resolve('packages'))
+  .filter(p => !p.startsWith('.'))
 
 const globalConfig = module.exports = {
-  cacheDirectory: '.jest/cache',
-  testEnvironment: 'node',
   verbose: true,
-  bail: true,
-  projects: Fs.readdirSync(Path.resolve('packages'))
-    .filter(p => !p.startsWith('.'))
-    .map(configureProject)
+  bail: false,
+  projects: projects.map(configureProject)
 }
 
 function configureProject (pkg) {
   let c = {
     displayName: pkg,
-    // moduleNameMapper: {
-    //   '^@protium/([\\w-]+)$': '<rootDir>/packages/$1/src',
-    //   '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/src$2',
-    // },
+    cacheDirectory: '.jest/cache',
+    testEnvironment: 'node',
+    preset: 'ts-jest',
+    moduleNameMapper: {
+      '^@protium/([\\w-]+)$': '<rootDir>/packages/$1/src',
+      '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/src$2',
+    },
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),
       },
     },
-    preset: 'ts-jest',
     testMatch: [
       `<rootDir>/packages/${pkg}/**/*.test.ts?(x)`
+    ],
+    transformIgnorePatterns: [
+      "node_modules/(?!@protium)"
     ]
   }
 
   if (pkg === 'app') {
-    c = {
+    return {
+      ...c,
       ...tsJest,
-      preset: 'react-native',
-      displayName: c.displayName,
-      moduleNameMapper: c.moduleNameMapper,
-      globals: c.globals,
       testMatch: c.testMatch,
+      preset: 'react-native',
       setupFiles: [
         '<rootDir>/enzyme.config.ts'
       ],
       transform: {
         ...tsJest.transform,
         '\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js'
-      }
+      },
+      transformIgnorePatterns: [
+        "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@protium)"
+      ],
     }
   }
 

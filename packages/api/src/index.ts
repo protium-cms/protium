@@ -1,8 +1,7 @@
 import Express from 'express'
 
-const app = Express()
-export default app
+export const api = Express()
 
-app.get('/', (req, res) => {
+api.get('/', (req, res) => {
   res.json({hello: 'world'})
 })

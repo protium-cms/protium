@@ -1,4 +1,4 @@
-import app from '.'
+import {app} from '.'
 
 describe('app', () => {
   it('should export an express-like object', () => {

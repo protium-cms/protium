@@ -24,7 +24,7 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "test": "jest",
     "dev": "tsnd src/index.ts",
     "start": "node dist/index.js"
