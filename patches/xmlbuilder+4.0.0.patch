@@ -1,0 +1,190 @@
+patch-package
+--- a/node_modules/xmlbuilder/lib/XMLAttribute.js
++++ b/node_modules/xmlbuilder/lib/XMLAttribute.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLAttribute, create;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   module.exports = XMLAttribute = (function() {
+     function XMLAttribute(parent, name, value) {
+--- a/node_modules/xmlbuilder/lib/XMLCData.js
++++ b/node_modules/xmlbuilder/lib/XMLCData.js
+@@ -4,7 +4,7 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLComment.js
++++ b/node_modules/xmlbuilder/lib/XMLComment.js
+@@ -4,7 +4,7 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLDTDAttList.js
++++ b/node_modules/xmlbuilder/lib/XMLDTDAttList.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLDTDAttList, create;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   module.exports = XMLDTDAttList = (function() {
+     function XMLDTDAttList(parent, elementName, attributeName, attributeType, defaultValueType, defaultValue) {
+--- a/node_modules/xmlbuilder/lib/XMLDTDElement.js
++++ b/node_modules/xmlbuilder/lib/XMLDTDElement.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLDTDElement, create;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   module.exports = XMLDTDElement = (function() {
+     function XMLDTDElement(parent, name, value) {
+--- a/node_modules/xmlbuilder/lib/XMLDTDEntity.js
++++ b/node_modules/xmlbuilder/lib/XMLDTDEntity.js
+@@ -2,9 +2,9 @@
+ (function() {
+   var XMLDTDEntity, create, isObject;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+-  isObject = require('lodash/lang/isObject');
++  isObject = require("lodash/isObject");
+ 
+   module.exports = XMLDTDEntity = (function() {
+     function XMLDTDEntity(parent, pe, name, value) {
+--- a/node_modules/xmlbuilder/lib/XMLDTDNotation.js
++++ b/node_modules/xmlbuilder/lib/XMLDTDNotation.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLDTDNotation, create;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   module.exports = XMLDTDNotation = (function() {
+     function XMLDTDNotation(parent, name, value) {
+--- a/node_modules/xmlbuilder/lib/XMLDeclaration.js
++++ b/node_modules/xmlbuilder/lib/XMLDeclaration.js
+@@ -4,9 +4,9 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+-  isObject = require('lodash/lang/isObject');
++  isObject = require("lodash/isObject");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLDocType.js
++++ b/node_modules/xmlbuilder/lib/XMLDocType.js
+@@ -2,9 +2,9 @@
+ (function() {
+   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+-  isObject = require('lodash/lang/isObject');
++  isObject = require("lodash/isObject");
+ 
+   XMLCData = require('./XMLCData');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLElement.js
++++ b/node_modules/xmlbuilder/lib/XMLElement.js
+@@ -4,13 +4,13 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+-  isObject = require('lodash/lang/isObject');
++  isObject = require("lodash/isObject");
+ 
+-  isFunction = require('lodash/lang/isFunction');
++  isFunction = require("lodash/isFunction");
+ 
+-  every = require('lodash/collection/every');
++  every = require("lodash/every");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLNode.js
++++ b/node_modules/xmlbuilder/lib/XMLNode.js
+@@ -3,11 +3,11 @@
+   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isEmpty, isFunction, isObject,
+     hasProp = {}.hasOwnProperty;
+ 
+-  isObject = require('lodash/lang/isObject');
++  isObject = require("lodash/isObject");
+ 
+-  isFunction = require('lodash/lang/isFunction');
++  isFunction = require("lodash/isFunction");
+ 
+-  isEmpty = require('lodash/lang/isEmpty');
++  isEmpty = require("lodash/isEmpty");
+ 
+   XMLElement = null;
+ 
+--- a/node_modules/xmlbuilder/lib/XMLProcessingInstruction.js
++++ b/node_modules/xmlbuilder/lib/XMLProcessingInstruction.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLProcessingInstruction, create;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   module.exports = XMLProcessingInstruction = (function() {
+     function XMLProcessingInstruction(parent, target, value) {
+--- a/node_modules/xmlbuilder/lib/XMLRaw.js
++++ b/node_modules/xmlbuilder/lib/XMLRaw.js
+@@ -4,7 +4,7 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/XMLText.js
++++ b/node_modules/xmlbuilder/lib/XMLText.js
+@@ -4,7 +4,7 @@
+     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+     hasProp = {}.hasOwnProperty;
+ 
+-  create = require('lodash/object/create');
++  create = require("lodash/create");
+ 
+   XMLNode = require('./XMLNode');
+ 
+--- a/node_modules/xmlbuilder/lib/index.js
++++ b/node_modules/xmlbuilder/lib/index.js
+@@ -2,7 +2,7 @@
+ (function() {
+   var XMLBuilder, assign;
+ 
+-  assign = require('lodash/object/assign');
++  assign = require("lodash/assign");
+ 
+   XMLBuilder = require('./XMLBuilder');
+ 

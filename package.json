@@ -25,9 +25,14 @@
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
     "jest-runner-tsc": "^1.3.2",
+    "patch-package": "^5.1.1",
+    "postinstall-postinstall": "^2.0.0",
     "react-native": "0.55.4",
     "tslint": "^5.12.0",
     "tslint-junit-formatter": "^5.1.0"
+  },
+  "resolutions": {
+    "lodash": "4.17.10"
   },
   "scripts": {
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/dist\" \"packages/**/node_modules\"",
@@ -45,6 +50,7 @@
     "test": "jest",
     "test:ci": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci --coverage --reporters=default --reporters=jest-junit",
     "release": "echo 'disabled for now'",
-    "release:debug": "helm install --name test --devel --dry-run --debug ./chart"
+    "release:debug": "helm install --name test --devel --dry-run --debug ./chart",
+    "postinstall": "patch-package"
   }
 }
