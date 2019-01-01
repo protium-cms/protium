@@ -3,7 +3,7 @@ import {AppRegistry, Text, View} from 'react-native'
 
 export const App = () => {
   return <View>
-    <Text>Hello world</Text>
+    <Text>Hello world foo foo</Text>
   </View>
 }
 

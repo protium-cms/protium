@@ -12,7 +12,7 @@ app.use(compression())
 app.use(bodyParser.json({strict: true}))
 
 if (!PRODUCTION) {
-  app.use(devMiddleware({publicPath: '/assets'}))
+  app.use(devMiddleware())
 }
 
 app.get('/', (req, res) => {

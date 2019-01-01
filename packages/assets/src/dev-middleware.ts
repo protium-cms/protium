@@ -11,7 +11,7 @@ export interface IDevMiddlewareOpts {
 
 const defaultOpts = {
   browserBundleName: 'browser',
-  publicPath: '/assets',
+  publicPath: '/assets/',
 }
 
 export default function createDevMiddleware (options: IDevMiddlewareOpts = defaultOpts) {
@@ -25,6 +25,7 @@ export default function createDevMiddleware (options: IDevMiddlewareOpts = defau
   }
 
   browserConfig.mode = 'development'
+  browserConfig.output!.publicPath = opts.publicPath
   const browserEntry = Object.keys(browserConfig.entry!).find((eKey: string) => {
     return eKey === opts.browserBundleName
   }) as string
@@ -34,7 +35,7 @@ export default function createDevMiddleware (options: IDevMiddlewareOpts = defau
   }
 
   browserConfig.entry[browserEntry].unshift(
-    `webpack-hot-middleware/client?name=${opts.browserBundleName}`,
+    `webpack-hot-middleware/client`,
   )
 
   browserConfig.plugins!.push(new Webpack.HotModuleReplacementPlugin())
