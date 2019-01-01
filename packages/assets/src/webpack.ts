@@ -3,15 +3,18 @@ import Path from 'path'
 import Webpack from 'webpack'
 import {getContext} from './utils'
 
-const APP_PACKAGE = '@protium/app'
+interface IAppWebpackConfig extends Webpack.Configuration {
+  entry: {[key: string]: string[]}
+}
 
-const webpackConfig: Webpack.Configuration[] = [
+const APP_PACKAGE = '@protium/app'
+const webpackConfig: IAppWebpackConfig[] = [
   config('browser'),
 ]
 
 export = webpackConfig
 
-function config (target: 'browser' | 'server'): Webpack.Configuration {
+function config (target: 'browser' | 'server'): IAppWebpackConfig {
   const packageContext = getContext(APP_PACKAGE)
   if (!packageContext) {
     throw new Error(`Unable to find ${APP_PACKAGE}`)
@@ -21,7 +24,7 @@ function config (target: 'browser' | 'server'): Webpack.Configuration {
   const entryFile = target === 'browser'
     ? './browser' : './index'
 
-  const c: Webpack.Configuration = {
+  const c: IAppWebpackConfig = {
     context: Path.join(moduleContext, 'src'),
     devtool: 'source-map',
     entry: {

@@ -31,8 +31,8 @@
     "npm.enableScriptExplorer": true,
     "breadcrumbs.enabled": true,
     "tsfmt.tslint.autoFix": "enabled",
-    "tslint.configFile": "tslint.json",
-    "tslint.ignoreDefinitionFiles": true
+    "tslint.ignoreDefinitionFiles": true,
+    "workbench.panel.defaultLocation": "right"
   },
   "launch": {
     "configurations": [

@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "dev": "tsnd -r tsconfig-paths/register --prefer-ts src/index.ts",
+    "dev": "tsnd -r tsconfig-paths/register --no-notify --prefer-ts src/index.ts",
     "start": "node lib/serve/src/index.js"
   }
 }
