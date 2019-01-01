@@ -19,19 +19,19 @@ See the [guide](./CONTRIBUTING.md).
 
 1. Clone the repository and `cd` into it.
 2. Make sure you're on the correct version of node by running:
-    ```bash
+    ```console
     $ nvm install && nvm use
     ```
 3. Bootstrap the project.
-    ```bash
+    ```console
     $ yarn bootstrap
     ```
 4. Run the tests to make sure everything is setup correctly.
-    ```bash
+    ```console
     $ yarn test
     ```
 5. Run the dev script to get hacking!
-    ```bash
+    ```console
     $ yarn dev
     ```
 6. Profit!
@@ -45,19 +45,19 @@ This project uses a [monorepo format](https://danluu.com/monorepo/), where indiv
 
 When first cloning the repo, an additional step is needed to setup all the interproject dependencies. This is simplified into one command via a package script.
 
-```bash
+```console
 $ yarn bootstrap
 # equivalent to `yarn && lerna bootstrap`
 ```
 
 ##### Adding a dependency to multiple packages
 
-```bash
+```console
 $ yarn lerna add lodash
 # adds to all packages
 ```
 
-```bash
+```console
 $ yarn lerna add lodash --scope @protium/app --scope @protium/web
 # adds to the scoped packages
 ```
@@ -66,19 +66,19 @@ $ yarn lerna add lodash --scope @protium/app --scope @protium/web
 
 *Note: this only works for one target dependency at a time*
 
-```bash
+```console
 $ yarn lerna add @protium/new-package --scope @protium/app
 ```
 
 ##### Adding external dependencies to a package
 
-```bash
+```console
 $ yarn workspace @protium/app add redux react-redux
 ```
 
 ##### Adding a dependency to the root package
 
-```bash
+```console
 $ yarn add -D -W some-dependency
 ```
 
