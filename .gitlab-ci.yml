@@ -17,6 +17,7 @@ cache:
     - "node_modules/"
     - "packages/api/node_modules/"
     - "packages/app/node_modules/"
+    - "packages/assets/node_modules/"
     - "packages/serve/node_modules/"
     - "packages/web/node_modules/"
 
