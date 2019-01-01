@@ -13,10 +13,11 @@
     "skipLibCheck": true,
     "baseUrl": "packages",
     "paths": {
-      "@protium/api": ["api/src"],
-      "@protium/app": ["app/src"],
-      "@protium/serve": ["serve/src"],
-      "@protium/web": ["web/src"]
+      "@protium/api*": ["api/src*"],
+      "@protium/app*": ["app/src*"],
+      "@protium/assets*": ["assets/src*"],
+      "@protium/serve*": ["serve/src*"],
+      "@protium/web*": ["web/src*"]
     }
   }
 }

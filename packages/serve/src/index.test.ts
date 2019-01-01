@@ -1,8 +1,8 @@
-jest.mock('@protium/api', () => ({api: {listen: jest.fn()}}))
-jest.mock('@protium/web', () => ({app: {listen: jest.fn()}}))
+jest.mock('@protium/api/index', () => ({api: {listen: jest.fn()}}))
+jest.mock('@protium/web/index', () => ({app: {listen: jest.fn()}}))
 
-import {api} from '@protium/api'
-import {app} from '@protium/web'
+import {api} from '@protium/api/index'
+import {app} from '@protium/web/index'
 import '.'
 
 describe('entrypoint', () => {

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/web/index.js",
   "source": "src/index.ts",
   "engines": {
     "node": ">=10",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@protium/app": "^0.0.1",
+    "@protium/assets": "^0.0.1",
     "@types/express": "^4.16.0",
     "@types/node": "^10.12.18",
     "express": "^4.16.4",
