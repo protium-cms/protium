@@ -9,7 +9,7 @@ const projects = Fs.readdirSync(Path.resolve('packages'))
 
 const globalConfig = module.exports = {
   verbose: true,
-  bail: false,
+  bail: true,
   projects: projects.map(configureProject)
 }
 
