@@ -1,4 +1,4 @@
-import {getContext} from '@protium/assets/utils'
+import {getContext} from '@protium/assets/src/utils'
 import Express from 'express'
 import Path from 'path'
 

@@ -1,0 +1,77 @@
+{
+	"folders": [
+    {
+      "name": "App",
+      "path": "packages/app",
+      "uri": "http://localhost:3000"
+    },
+    {
+      "name": "API",
+      "path": "packages/api",
+      "uri": "http://localhost:3001"
+    },
+    {
+      "name": "Web",
+      "path": "packages/web",
+      "uri": "http://localhost:3000"
+    },
+    {
+      "name": "Assets",
+      "path": "packages/assets"
+    },
+    {
+      "name": "App Server",
+      "path": "packages/serve"
+    },
+		{
+      "name": "Project",
+      "path": "."
+    }
+	],
+  "settings": {
+    "npm.runInTerminal": true,
+    "npm.packageManager": "yarn",
+    "npm.enableScriptExplorer": true,
+    "breadcrumbs.enabled": true,
+  },
+  "launch": {
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Browser",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder:Assets}/dist/browser.bundle.js",
+        "sourceMapPathOverrides": {
+          "webpack:///./~/*": "./node_modules/*",
+          "webpack:///./*": "./packages/app/src/*",
+          "webpack:///*": "*"
+        }
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "App Server",
+        "cwd": "${workspaceFolder:App Server}",
+        "runtimeArgs": [
+          "-r",
+          "ts-node/register",
+          "-r",
+          "tsconfig-paths/register"
+        ],
+        "args": [
+          "src/index.ts"
+        ]
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Application",
+        "configurations": [
+          "Browser",
+          "App Server"
+        ]
+      }
+    ]
+  }
+}

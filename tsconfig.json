@@ -12,11 +12,11 @@
     "skipLibCheck": true,
     "baseUrl": "packages",
     "paths": {
-      "@protium/api*": ["api/src*"],
-      "@protium/app*": ["app/src*"],
-      "@protium/assets*": ["assets/src*"],
-      "@protium/serve*": ["serve/src*"],
-      "@protium/web*": ["web/src*"]
+      "@protium/api": ["api/src*", "api/src"],
+      "@protium/app": ["app/src*", "app/src"],
+      "@protium/assets": ["assets/src*", "assets/src"],
+      "@protium/serve": ["serve/src*", "serve/src"],
+      "@protium/web": ["web/src*", "web/src"]
     }
   }
 }

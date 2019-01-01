@@ -19,7 +19,7 @@ function configureProject (pkg) {
     preset: 'ts-jest',
     moduleNameMapper: {
       '^@protium/([\\w-]+)$': '<rootDir>/packages/$1/src',
-      '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/src$2',
+      '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/$2',
     },
     globals: {
       'ts-jest': {

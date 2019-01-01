@@ -1,0 +1,4 @@
+{
+  "insertSpaceBeforeFunctionParenthesis": true,
+  "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
+}

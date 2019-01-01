@@ -3,11 +3,13 @@ import Path from 'path'
 import Webpack from 'webpack'
 import {getContext} from './utils'
 
-export = [
-  config('browser'),
-] as Webpack.Configuration[]
-
 const APP_PACKAGE = '@protium/app'
+
+const webpackConfig: Webpack.Configuration[] = [
+  config('browser'),
+]
+
+export = webpackConfig
 
 function config (target: 'browser' | 'server'): Webpack.Configuration {
   const packageContext = getContext(APP_PACKAGE)
