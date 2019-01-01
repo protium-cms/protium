@@ -32,6 +32,7 @@ function config (target: 'browser' | 'server'): Webpack.Configuration {
           loader: 'ts-loader',
           options: {
             configFile: Path.join(moduleContext, 'tsconfig.build.json'),
+            transpileOnly: true,
           },
           test: /\.tsx?$/,
         },

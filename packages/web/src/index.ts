@@ -4,12 +4,12 @@ import Path from 'path'
 
 export const app = Express()
 
-const assetContext = getContext('@protium/assets/dist')
+const assetContext = getContext('@protium/assets')
 if (!assetContext) {
-  throw new Error(`Can't find asset directory`)
+  throw new Error(`Can't find asset module`)
 }
 
-app.use('/assets', Express.static(Path.resolve(assetContext), {
+app.use('/assets', Express.static(Path.resolve(assetContext, 'dist'), {
   fallthrough: true,
 }))
 
