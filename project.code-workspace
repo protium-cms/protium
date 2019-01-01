@@ -2,18 +2,15 @@
 	"folders": [
     {
       "name": "App",
-      "path": "packages/app",
-      "uri": "http://localhost:3000"
+      "path": "packages/app"
     },
     {
       "name": "API",
-      "path": "packages/api",
-      "uri": "http://localhost:3001"
+      "path": "packages/api"
     },
     {
       "name": "Web",
-      "path": "packages/web",
-      "uri": "http://localhost:3000"
+      "path": "packages/web"
     },
     {
       "name": "Assets",
@@ -33,6 +30,9 @@
     "npm.packageManager": "yarn",
     "npm.enableScriptExplorer": true,
     "breadcrumbs.enabled": true,
+    "tsfmt.tslint.autoFix": "enabled",
+    "tslint.configFile": "tslint.json",
+    "tslint.ignoreDefinitionFiles": true
   },
   "launch": {
     "configurations": [

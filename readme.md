@@ -21,18 +21,22 @@ See the [guide](./CONTRIBUTING.md).
 2. Make sure you're on the correct version of node by running:
     ```console
     $ nvm install && nvm use
+    --> installs the right node & switches path to use it
     ```
 3. Bootstrap the project.
     ```console
     $ yarn bootstrap
+    --> install dependencies and symlink packages
     ```
 4. Run the tests to make sure everything is setup correctly.
     ```console
     $ yarn test
+    --> run the test suite
     ```
 5. Run the dev script to get hacking!
     ```console
     $ yarn dev
+    --> run a web development server
     ```
 6. Profit!
 
@@ -48,19 +52,19 @@ When first cloning the repo, an additional step is needed to setup all the inter
 
 ```console
 $ yarn bootstrap
-# equivalent to `yarn && lerna bootstrap`
+--> equivalent to `yarn && lerna bootstrap`
 ```
 
 ##### Adding a dependency to multiple packages
 
 ```console
 $ yarn lerna add lodash
-# adds to all packages
+--> adds dependency to all packages
 ```
 
 ```console
 $ yarn lerna add lodash --scope @protium/app --scope @protium/web
-# adds to the scoped packages
+--> adds to the scoped packages
 ```
 
 ##### Adding a internal dependency to another internal package
@@ -69,18 +73,21 @@ $ yarn lerna add lodash --scope @protium/app --scope @protium/web
 
 ```console
 $ yarn lerna add @protium/new-package --scope @protium/app
+--> same as above, but also symlinks new package
 ```
 
 ##### Adding external dependencies to a package
 
 ```console
 $ yarn workspace @protium/app add redux react-redux
+--> same as yarn add but with context of a workspace
 ```
 
 ##### Adding a dependency to the root package
 
 ```console
 $ yarn add -D -W some-dependency
+--> tells yarn to add the dep to the root package
 ```
 
 #### VSCode

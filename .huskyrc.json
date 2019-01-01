@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "yarn format",
+    "pre-commit": "yarn lint",
     "pre-push": "yarn validate"
   }
 }
