@@ -39,6 +39,7 @@ See the [guide](./CONTRIBUTING.md).
 ### Tools
 
 #### Yarn/Lerna
+
 This project uses a [monorepo format](https://danluu.com/monorepo/), where individual packages are housed within the same repository. We use [Lerna](https://github.com/lerna/lerna#about) to manage dependencies between project packages, which in turn uses [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) feature to wire it all up.
 
 ##### Bootstrapping the project
@@ -88,7 +89,7 @@ The owner of this project likes to use Microsoft's [Visual Studio Code](https://
 
 Of course, *feel free to use whatever editor you prefer*, but as a convenience—we ship a preconfigured workspace as well as some tasks and debugger configurations to aid in development.
 
-**Extensions**
+##### Extensions
 
 - [TypeScript TSLint Plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 - [tsfmt - TypeScript Formatter](https://marketplace.visualstudio.com/items?itemName=eternalphane.tsfmt-vscode)
