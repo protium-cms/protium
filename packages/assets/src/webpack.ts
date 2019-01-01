@@ -43,7 +43,7 @@ function config (target: 'browser' | 'server'): Webpack.Configuration {
     name: target,
     output: {
       filename: '[name].bundle.js',
-      path: Path.resolve('dist'),
+      path: Path.resolve('lib'),
     },
     performance: {
       hints: false,

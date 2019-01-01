@@ -366,7 +366,7 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/macos,windows,node,xcode,android,androidstudio,visualstudiocode
 
 coverage
-dist
+lib
 keys
 .env
 secrets.yaml

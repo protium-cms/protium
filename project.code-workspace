@@ -41,7 +41,7 @@
         "request": "launch",
         "name": "Browser",
         "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder:Assets}/dist/browser.bundle.js",
+        "webRoot": "${workspaceFolder:Assets}/lib/browser.bundle.js",
         "sourceMapPathOverrides": {
           "webpack:///./~/*": "./node_modules/*",
           "webpack:///./*": "./packages/app/src/*",

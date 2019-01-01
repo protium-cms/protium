@@ -32,10 +32,10 @@
     "react-devtools-core": "3.4.2"
   },
   "scripts": {
-    "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/dist\" \"packages/**/node_modules\"",
+    "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\" \"packages/**/node_modules\"",
     "clean-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "yarn && lerna bootstrap",
-    "build": "lerna run build",
+    "build": "lerna run build && lerna run build:web",
     "build-image": "yarn clean && docker build --no-cache .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
     "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",

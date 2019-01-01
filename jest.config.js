@@ -1,6 +1,8 @@
 const Fs = require('fs')
 const Path = require('path')
 const {defaults: tsJest} = require('ts-jest/presets')
+const {pathsToModuleNameMapper} = require('ts-jest/utils')
+const {compilerOptions} = require('./tsconfig')
 
 const projects = Fs.readdirSync(Path.resolve('packages'))
   .filter(p => !p.startsWith('.'))
@@ -17,10 +19,7 @@ function configureProject (pkg) {
     cacheDirectory: '.jest/cache',
     testEnvironment: 'node',
     preset: 'ts-jest',
-    moduleNameMapper: {
-      '^@protium/([\\w-]+)$': '<rootDir>/packages/$1/src',
-      '^@protium/([\\w-]+)(\\/.*)?$': '<rootDir>/packages/$1/src/$2',
-    },
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>/packages/'}),
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),

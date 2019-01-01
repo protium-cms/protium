@@ -2,6 +2,7 @@
   "name": "@protium/assets",
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
+  "main": "lib/index.js",
   "license": "MIT",
   "engines": {
     "node": ">=10",
@@ -26,7 +27,8 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "scripts": {
-    "build": "webpack --config src/webpack.ts --mode production",
-    "build:dev": "webpack --config src/webpack.ts --mode development"
+    "build": "tsc",
+    "build:web": "webpack --config src/webpack.ts --mode production",
+    "build:web:dev": "webpack --config src/webpack.ts --mode development"
   }
 }

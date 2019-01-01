@@ -1,4 +1,4 @@
-import {getContext} from '@protium/assets/utils'
+import {getContext} from '@protium/assets/lib/utils'
 import Express from 'express'
 import Path from 'path'
 
@@ -9,7 +9,7 @@ if (!assetContext) {
   throw new Error(`Can't find asset module`)
 }
 
-app.use('/assets', Express.static(Path.resolve(assetContext, 'dist'), {
+app.use('/assets', Express.static(Path.resolve(assetContext, 'lib'), {
   fallthrough: true,
 }))
 
