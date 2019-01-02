@@ -16,6 +16,11 @@ if (DEVELOPMENT) {
 
 app.get('/', (req, res) => {
   res.send(`
+    <style>
+      html, body, #app-container {
+        height: 100%;
+      }
+    </style>
     <div id="app-container"></div>
     <script src="/assets/browser.bundle.js"></script>
   `)
