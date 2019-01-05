@@ -1,10 +1,10 @@
-import devMiddleware from '@protium/assets/lib/dev-middleware'
-import ssrMiddleware from '@protium/assets/lib/ssr-middleware'
+import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/middleware'
 import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
+const APP_MODULE = '@protium/app'
 
 export const app = Express()
 
@@ -12,10 +12,10 @@ app.use(compression())
 app.use(json({strict: true}))
 
 if (DEVELOPMENT) {
-  app.use(devMiddleware())
+  app.use(createDevMiddleware({module: APP_MODULE}))
 }
 
-app.get('/*', ssrMiddleware())
+app.get('/*', createSSRMiddleware({module: APP_MODULE}))
 app.get('/', (req, res) => {
   res.send(`
     <style>

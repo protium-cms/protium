@@ -1,15 +1,16 @@
 import Fs from 'fs'
 import Path from 'path'
 import Webpack from 'webpack'
+import ManifestPlugin from 'webpack-manifest-plugin'
+import nodeExternals from 'webpack-node-externals'
+import {IAppWebpackConfig} from './middleware'
 import {getContext} from './utils'
 
-interface IAppWebpackConfig extends Webpack.Configuration {
-  entry: {[key: string]: string[]}
-}
-
 const APP_PACKAGE = '@protium/app'
+
 const webpackConfig: IAppWebpackConfig[] = [
   config('browser'),
+  config('server'),
 ]
 
 export = webpackConfig
@@ -17,7 +18,7 @@ export = webpackConfig
 function config (target: 'browser' | 'server'): IAppWebpackConfig {
   const packageContext = getContext(APP_PACKAGE)
   if (!packageContext) {
-    throw new Error(`Unable to find ${APP_PACKAGE}`)
+    throw new Error(`Unable to find ${APP_PACKAGE} (${target})`)
   }
 
   const moduleContext = Fs.realpathSync(Path.resolve(packageContext))
@@ -53,16 +54,24 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
     },
     plugins: [
       new Webpack.DefinePlugin({
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       }),
     ],
     resolve: {
       alias: {
         'react-native': 'react-native-web',
       },
-      extensions: ['.ts', '.tsx', '.js'],
-      symlinks: true,
+      extensions: ['.tsx', '.ts', '.js'],
     },
+  }
+
+  if (target === 'server') {
+    c.target = 'node'
+    c.externals = [nodeExternals()]
+    c.output!.libraryTarget = 'commonjs2'
+    c.plugins!.push(
+      new ManifestPlugin(),
+    )
   }
 
   return c
