@@ -1,3 +1,4 @@
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import Fs from 'fs'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
@@ -35,15 +36,7 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
     },
     module: {
       rules: [
-        {
-          include: moduleContext,
-          loader: 'ts-loader',
-          options: {
-            configFile: Path.join(moduleContext, 'tsconfig.build.json'),
-            transpileOnly: true,
-          },
-          test: /\.tsx?$/,
-        },
+        babelRule(moduleContext),
       ],
     },
     name: target,
@@ -67,6 +60,17 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
     },
   }
 
+  if (target === 'browser') {
+    c.plugins!.unshift(
+      new ForkTsCheckerWebpackPlugin({
+        async: true,
+        tsconfig: Path.join(moduleContext, 'tsconfig.json'),
+        tslint: Path.resolve('../../tslint.json'),
+        workers: ForkTsCheckerWebpackPlugin.ONE_CPU,
+      }),
+    )
+  }
+
   if (target === 'server') {
     c.target = 'node'
     c.externals = [nodeExternals({
@@ -80,4 +84,31 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
   }
 
   return c
+}
+
+function babelRule (context: string): Webpack.Rule {
+  return {
+    include: context,
+    test: /\.(j|t)sx?$/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        cacheDirectory: true,
+        plugins: [
+          ['@babel/plugin-proposal-decorators', {legacy: true}],
+          ['@babel/plugin-proposal-class-properties', {loose: true}],
+          'react-hot-loader/babel',
+        ],
+        presets: [
+          [
+            '@babel/preset-env',
+            {targets: {browsers: 'last 2 versions'}},
+          ],
+          '@babel/preset-typescript',
+          '@babel/preset-react',
+        ],
+      },
+    },
+  }
 }

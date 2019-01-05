@@ -1,4 +1,5 @@
 import React from 'react'
+import {hot} from 'react-hot-loader/root'
 import {AppRegistry, View} from 'react-native'
 import styled from 'styled-components/native'
 import Logo from './components/Logo'
@@ -13,8 +14,10 @@ const Container = styled(View)`
   width: 100%;
 `
 
-export const App = () => {
+const Application = () => {
   return <Container>
     <Logo />
   </Container>
 }
+
+export const App = hot(Application)

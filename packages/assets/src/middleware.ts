@@ -136,7 +136,7 @@ function buildBrowserCompiler (config: IAppWebpackConfig, entrypoint: string, pu
   }
 
   config.entry[browserEntry].unshift(
-    `webpack-hot-middleware/client`,
+    `webpack-hot-middleware/client?timeout=10000&reload=true`,
   )
 
   config.plugins!.push(new Webpack.HotModuleReplacementPlugin())
