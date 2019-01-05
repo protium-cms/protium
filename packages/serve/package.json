@@ -18,11 +18,15 @@
     "@protium/web": "^0.0.1",
     "@types/node": "^10.12.18",
     "express": "^4.16.4",
+    "module-alias": "^2.1.0",
     "typescript": "^3.2.2"
+  },
+  "_moduleAliases": {
+    "react-native": "node_modules/react-native-web"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "dev": "tsnd -r tsconfig-paths/register --no-notify --prefer-ts src/index.ts",
-    "start": "NODE_ENV=production node lib/serve/src/index.js"
+    "dev": "tsnd -r tsconfig-paths/register -r module-alias/register --no-notify --prefer-ts src/index.ts",
+    "start": "NODE_ENV=production node -r module-alias/register lib/serve/src/index.js"
   }
 }

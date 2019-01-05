@@ -69,8 +69,11 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
 
   if (target === 'server') {
     c.target = 'node'
-    c.externals = [nodeExternals()]
+    c.externals = [nodeExternals({
+      modulesDir: '../../node_modules',
+    })]
     c.output!.libraryTarget = 'commonjs2'
+    c.optimization = {minimize: false}
     c.plugins!.push(
       new ManifestPlugin(),
     )

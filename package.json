@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@types/react": "^16.7.18",
-    "@types/react-native": "^0.57.25",
+    "@types/react-native": "^0.55.5",
     "lerna": "^3.8.0",
     "patch-package": "^5.1.1",
     "postinstall-postinstall": "^2.0.0",
@@ -21,6 +21,7 @@
     "husky": "^1.3.1",
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
+    "lerna-semver-sync": "^1.3.1",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",
     "tslint-junit-formatter": "^5.1.0",
@@ -33,6 +34,9 @@
   "resolutions": {
     "lodash": "4.17.10",
     "react-devtools-core": "3.4.2"
+  },
+  "_moduleAliases": {
+    "react-native": "node_modules/react-native-web"
   },
   "scripts": {
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\"",
@@ -48,6 +52,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:ci": "tslint --formatters-dir node_modules/tslint-junit-formatter/formatters --format junit --out report-lint.xml -c tslint.json 'packages/**/*.{ts,tsx}'",
     "start": "lerna run start --parallel",
+    "sync-package-versions": "lerna-semver-sync",
     "test": "jest",
     "test:ci": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci --coverage --reporters=default --reporters=jest-junit",
     "release": "echo 'disabled for now'",
