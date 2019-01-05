@@ -12,20 +12,39 @@
     "skipLibCheck": true,
     "baseUrl": "packages",
     "paths": {
-      "@protium/api": ["api/src"],
-      "@protium/api/lib": ["api/src/*"],
-
-      "@protium/app": ["app/src"],
-      "@protium/app/lib": ["app/src/*"],
-
-      "@protium/assets": ["assets/src"],
-      "@protium/assets/lib/*": ["assets/src/*"],
-
-      "@protium/serve": ["serve/src"],
-      "@protium/serve/lib/*": ["serve/src/*"],
-
-      "@protium/web": ["web/src"],
-      "@protium/web/lib/*": ["web/src/*"]
+      "*": [
+        "types/*"
+      ],
+      "@protium/api": [
+        "api/src"
+      ],
+      "@protium/api/lib": [
+        "api/src/*"
+      ],
+      "@protium/app": [
+        "app/src"
+      ],
+      "@protium/app/lib": [
+        "app/src/*"
+      ],
+      "@protium/assets": [
+        "assets/src"
+      ],
+      "@protium/assets/lib/*": [
+        "assets/src/*"
+      ],
+      "@protium/serve": [
+        "serve/src"
+      ],
+      "@protium/serve/lib/*": [
+        "serve/src/*"
+      ],
+      "@protium/web": [
+        "web/src"
+      ],
+      "@protium/web/lib/*": [
+        "web/src/*"
+      ]
     }
   }
 }

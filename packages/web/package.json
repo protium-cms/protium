@@ -16,9 +16,11 @@
     "@types/compression": "^0.0.36",
     "@types/express": "^4.16.0",
     "@types/node": "^10.12.18",
+    "@types/resolve-pkg": "^1.0.1",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "express": "^4.16.4",
+    "resolve-pkg": "^1.0.0",
     "typescript": "^3.2.2"
   },
   "scripts": {

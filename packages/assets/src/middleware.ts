@@ -2,11 +2,12 @@ import {NextFunction, Request, Response} from 'express'
 import Path from 'path'
 import React from 'react'
 import {renderToStaticNodeStream} from 'react-dom/server'
+import {AppRegistry} from 'react-native-web'
+import resolvePkg from 'resolve-pkg'
 import Webpack, {Configuration} from 'webpack'
 import WebpackDevMiddleware from 'webpack-dev-middleware'
 import WebpackHotMiddleware from 'webpack-hot-middleware'
 import Html from './components/Html'
-import {getContext} from './utils'
 import assetConfig from './webpack'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
@@ -35,7 +36,7 @@ const defaultOpts = {
 
 export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
   const opts = {...defaultOpts, ...options}
-  const context = getContext(opts.assetsModule)
+  const context = resolvePkg(opts.assetsModule)
 
   if (!context) {
     throw new Error(`Unable to determine module context: ${context}`)
@@ -74,13 +75,15 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
     }
 
     res.locals.app = app
+    res.locals.appName = 'App'
+    AppRegistry.registerComponent(res.locals.appName, () => app)
 
     next()
   }
 
   function renderMiddleware (req: Request, res: Response, next: NextFunction) {
-    const {app} = res.locals
-    const appInstance = React.createElement(Html, {app: React.createElement(app)})
+    const appName: string = res.locals.appName
+    const appInstance = React.createElement(Html, {appName})
     const appStream = renderToStaticNodeStream(appInstance)
     return appStream.pipe(res)
   }

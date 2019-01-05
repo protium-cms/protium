@@ -1,12 +1,13 @@
 import Fs from 'fs'
 import Path from 'path'
+import resolvePkg from 'resolve-pkg'
 import Webpack from 'webpack'
 import ManifestPlugin from 'webpack-manifest-plugin'
 import nodeExternals from 'webpack-node-externals'
 import {IAppWebpackConfig} from './middleware'
-import {getContext} from './utils'
 
 const APP_PACKAGE = '@protium/app'
+const ASSET_PACKAGE = '@protium/assets'
 
 const webpackConfig: IAppWebpackConfig[] = [
   config('browser'),
@@ -16,7 +17,8 @@ const webpackConfig: IAppWebpackConfig[] = [
 export = webpackConfig
 
 function config (target: 'browser' | 'server'): IAppWebpackConfig {
-  const packageContext = getContext(APP_PACKAGE)
+  const packageContext = resolvePkg(APP_PACKAGE)
+  const assetContext = resolvePkg(ASSET_PACKAGE)
   if (!packageContext) {
     throw new Error(`Unable to find ${APP_PACKAGE} (${target})`)
   }
@@ -47,7 +49,7 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
     name: target,
     output: {
       filename: '[name].bundle.js',
-      path: Path.resolve('lib'),
+      path: Path.resolve(assetContext, 'lib'),
     },
     performance: {
       hints: false,

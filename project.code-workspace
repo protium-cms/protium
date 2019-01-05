@@ -1,5 +1,5 @@
 {
-	"folders": [
+  "folders": [
     {
       "name": "App",
       "path": "packages/app"
@@ -20,11 +20,15 @@
       "name": "App Server",
       "path": "packages/serve"
     },
-		{
+    {
+      "name": "Custom Types",
+      "path": "packages/types"
+    },
+    {
       "name": "Project",
       "path": "."
     }
-	],
+  ],
   "settings": {
     "npm.runInTerminal": true,
     "npm.packageManager": "yarn",
@@ -33,8 +37,7 @@
     "tsfmt.tslint.autoFix": "enabled",
     "tslint.ignoreDefinitionFiles": true,
     "workbench.panel.defaultLocation": "right",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnSave": true
   },
   "launch": {
     "configurations": [

@@ -2,12 +2,17 @@ import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/midd
 import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
+import Path from 'path'
+import resolvePkg from 'resolve-pkg'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
+
 const middlewareOpts = {
   assetsModule: '@protium/assets',
   module: '@protium/app',
 }
+
+const assetPath = Path.resolve(resolvePkg(middlewareOpts.assetsModule), 'lib')
 
 export const app = Express()
 
@@ -18,6 +23,7 @@ if (DEVELOPMENT) {
   app.use(createDevMiddleware())
 }
 
+app.use('/assets', Express.static(assetPath, {fallthrough: false}))
 app.get('/*', createSSRMiddleware())
 
 app.get('/', (req, res) => {

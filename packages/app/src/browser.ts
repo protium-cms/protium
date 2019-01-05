@@ -1,6 +1,7 @@
 import {AppRegistry} from 'react-native'
-import './index'
+import {App} from './index'
 
+AppRegistry.registerComponent('App', () => App)
 AppRegistry.runApplication('App', {
   rootTag: document.getElementById('app-container'),
 })

@@ -18,5 +18,3 @@ export const App = () => {
     <Logo />
   </Container>
 }
-
-AppRegistry.registerComponent('App', () => App)

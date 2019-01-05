@@ -5,6 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@types/react": "^16.7.18",
+    "@types/react-native": "^0.57.25",
     "lerna": "^3.8.0",
     "patch-package": "^5.1.1",
     "postinstall-postinstall": "^2.0.0",
@@ -33,7 +35,7 @@
     "react-devtools-core": "3.4.2"
   },
   "scripts": {
-    "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\" \"packages/**/node_modules\"",
+    "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\"",
     "clean-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "yarn && lerna bootstrap",
     "build": "lerna run build && lerna run build:web",
