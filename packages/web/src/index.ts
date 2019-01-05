@@ -4,7 +4,10 @@ import compression from 'compression'
 import Express from 'express'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
-const APP_MODULE = '@protium/app'
+const middlewareOpts = {
+  assetsModule: '@protium/assets',
+  module: '@protium/app',
+}
 
 export const app = Express()
 
@@ -12,10 +15,11 @@ app.use(compression())
 app.use(json({strict: true}))
 
 if (DEVELOPMENT) {
-  app.use(createDevMiddleware({module: APP_MODULE}))
+  app.use(createDevMiddleware())
 }
 
-app.get('/*', createSSRMiddleware({module: APP_MODULE}))
+app.get('/*', createSSRMiddleware())
+
 app.get('/', (req, res) => {
   res.send(`
     <style>

@@ -1,28 +1,92 @@
 import {NextFunction, Request, Response} from 'express'
+import Path from 'path'
+import React from 'react'
+import {renderToStaticNodeStream} from 'react-dom/server'
 import Webpack, {Configuration} from 'webpack'
 import WebpackDevMiddleware from 'webpack-dev-middleware'
 import WebpackHotMiddleware from 'webpack-hot-middleware'
+import Html from './components/Html'
+import {getContext} from './utils'
 import assetConfig from './webpack'
+
+const DEVELOPMENT = process.env.NODE_ENV === 'development'
 
 export interface IAppWebpackConfig extends Configuration {
   entry: {[key: string]: string[]}
 }
 
-export interface IDevMiddlewareOpts {
+export interface IWebpackMiddlewareOptions {
+  assetsModule: string
   browserBundleName?: string
   module: string
+  moduleExport: string
   publicPath?: string
   serverBundleName?: string
 }
 
 const defaultOpts = {
+  assetsModule: '@protium/assets',
   browserBundleName: 'browser',
   module: '@protium/app',
+  moduleExport: 'App',
   publicPath: '/assets/',
   serverBundleName: 'server',
 }
 
-export function createDevMiddleware (options: IDevMiddlewareOpts = defaultOpts) {
+export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
+  const opts = {...defaultOpts, ...options}
+  const context = getContext(opts.assetsModule)
+
+  if (!context) {
+    throw new Error(`Unable to determine module context: ${context}`)
+  }
+
+  const moduleDirectory = Path.resolve(context, 'lib')
+  const manifestPath = Path.join(moduleDirectory, 'manifest.json')
+
+  return [
+    resolverMiddleware,
+    renderMiddleware,
+  ]
+
+  function resolverMiddleware (req: Request, res: Response, next: NextFunction) {
+    const manifest = require(manifestPath)
+    const serverEntry = manifest[opts.serverBundleName + '.js']
+
+    if (!serverEntry) {
+      throw new Error(`Unable to determine server entrypoint: ${serverEntry}`)
+    }
+
+    res.locals.appEntrypoint = Path.join(moduleDirectory, serverEntry)
+    if (DEVELOPMENT) {
+      console.log(`[assets]: clear ${res.locals.appEntrypoint}`)
+      delete require.cache[res.locals.appEntrypoint]
+    }
+
+    const mod = require(res.locals.appEntrypoint)
+    if (!mod) {
+      throw new Error(`Unable to require server entrypoint: ${mod}`)
+    }
+
+    const app = mod[opts.moduleExport || 'default']
+    if (!app) {
+      throw new Error(`Unable to find app`)
+    }
+
+    res.locals.app = app
+
+    next()
+  }
+
+  function renderMiddleware (req: Request, res: Response, next: NextFunction) {
+    const {app} = res.locals
+    const appInstance = React.createElement(Html, {app: React.createElement(app)})
+    const appStream = renderToStaticNodeStream(appInstance)
+    return appStream.pipe(res)
+  }
+}
+
+export function createDevMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
   const opts = {...defaultOpts, ...options}
   const browserConfig = assetConfig.find((c: Webpack.Configuration) => {
     return c.name === opts.browserBundleName
@@ -86,23 +150,6 @@ function buildServerCompiler (config: IAppWebpackConfig, entrypoint: string) {
   }
 
   return Webpack(config)
-}
-
-export function createSSRMiddleware (options: IDevMiddlewareOpts = defaultOpts) {
-  const opts = {...defaultOpts, ...options}
-  // const opts.serverBundleName
-  return [
-    resolverMiddleware,
-    renderMiddleware,
-  ]
-}
-
-function resolverMiddleware (req: Request, res: Response, next: NextFunction) {
-  next()
-}
-
-function renderMiddleware (req: Request, res: Response, next: NextFunction) {
-  next()
 }
 
 function findEntry (config: IAppWebpackConfig, entrypoint: string) {

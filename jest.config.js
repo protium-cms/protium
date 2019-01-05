@@ -1,8 +1,8 @@
 const Fs = require('fs')
 const Path = require('path')
-const {defaults: tsJest} = require('ts-jest/presets')
-const {pathsToModuleNameMapper} = require('ts-jest/utils')
-const {compilerOptions} = require('./tsconfig')
+const { defaults: tsJest } = require('ts-jest/presets')
+const { pathsToModuleNameMapper } = require('ts-jest/utils')
+const { compilerOptions } = require('./tsconfig')
 
 const projects = Fs.readdirSync(Path.resolve('packages'))
   .filter(p => !p.startsWith('.'))
@@ -13,13 +13,15 @@ const globalConfig = module.exports = {
   projects: projects.map(configureProject)
 }
 
-function configureProject (pkg) {
+function configureProject(pkg) {
   let c = {
     displayName: pkg,
     cacheDirectory: '.jest/cache',
     testEnvironment: 'node',
     preset: 'ts-jest',
-    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>/packages/'}),
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+      prefix: `<rootDir>/packages/`
+    }),
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),
