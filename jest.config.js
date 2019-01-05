@@ -7,7 +7,16 @@ const { compilerOptions } = require('./tsconfig')
 const projects = Fs.readdirSync(Path.resolve('packages'))
   .filter(p => !p.startsWith('.'))
 
-const globalConfig = module.exports = {
+
+const modulePaths = Object.keys(compilerOptions.paths).reduce((acc, key) => {
+  if (key === '*') {
+    return acc
+  }
+  acc[key] = compilerOptions.paths[key]
+  return acc
+}, {})
+
+module.exports = {
   verbose: true,
   bail: true,
   projects: projects.map(configureProject)
@@ -19,7 +28,7 @@ function configureProject(pkg) {
     cacheDirectory: '.jest/cache',
     testEnvironment: 'node',
     preset: 'ts-jest',
-    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    moduleNameMapper: pathsToModuleNameMapper(modulePaths, {
       prefix: `<rootDir>/packages/`
     }),
     globals: {
