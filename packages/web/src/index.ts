@@ -1,5 +1,6 @@
 import devMiddleware from '@protium/assets/lib/dev-middleware'
-import bodyParser from 'body-parser'
+import ssrMiddleware from '@protium/assets/lib/ssr-middleware'
+import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
 
@@ -8,12 +9,13 @@ const DEVELOPMENT = process.env.NODE_ENV === 'development'
 export const app = Express()
 
 app.use(compression())
-app.use(bodyParser.json({strict: true}))
+app.use(json({strict: true}))
 
 if (DEVELOPMENT) {
   app.use(devMiddleware())
 }
 
+app.get('/*', ssrMiddleware())
 app.get('/', (req, res) => {
   res.send(`
     <style>

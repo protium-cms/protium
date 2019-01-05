@@ -1,17 +1,16 @@
 import React from 'react'
-import {StyleSheet, Text} from 'react-native'
+import {Text} from 'react-native'
+import styled from 'styled-components/native'
 
-const styles = StyleSheet.create({
-  logo: {
-    color: '#111',
-    fontSize: 50,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-})
+const Protium = styled(Text)`
+  color: #111;
+  font-size: 50;
+  font-weight: bold;
+  text-align: center;
+`
 
 export default function Logo () {
-  return <Text style={styles.logo}>
+  return <Protium>
     Protium
-  </Text>
+  </Protium>
 }

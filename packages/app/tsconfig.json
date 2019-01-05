@@ -5,10 +5,6 @@
     "jsx": "react",
     "module": "es6",
     "target": "es2015",
-    "typeRoots": [
-      "@types",
-      "types"
-    ],
     "noEmit": true
   }
 }
