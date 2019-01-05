@@ -32,7 +32,9 @@
     "breadcrumbs.enabled": true,
     "tsfmt.tslint.autoFix": "enabled",
     "tslint.ignoreDefinitionFiles": true,
-    "workbench.panel.defaultLocation": "right"
+    "workbench.panel.defaultLocation": "right",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
   },
   "launch": {
     "configurations": [
