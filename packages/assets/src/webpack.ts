@@ -121,7 +121,6 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   const babelConfig = {
     babelrc: false,
     cacheDirectory: true,
-    sourceMaps: true,
     plugins: [
       [
         '@babel/plugin-transform-runtime',
@@ -152,6 +151,7 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
       '@babel/preset-typescript',
       '@babel/preset-react',
     ] as any[],
+    sourceMaps: true,
   }
 
   if (target === ConfigTargets.Browser) {
