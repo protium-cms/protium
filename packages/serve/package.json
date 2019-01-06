@@ -17,8 +17,9 @@
     "@protium/api": "^0.0.1",
     "@protium/web": "^0.0.1",
     "@types/node": "^10.12.18",
-    "express": "^4.16.4",
+    "@types/spdy": "^3.4.4",
     "module-alias": "^2.1.0",
+    "spdy": "^4.0.0",
     "typescript": "^3.2.2"
   },
   "_moduleAliases": {
@@ -27,6 +28,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsnd -r tsconfig-paths/register -r module-alias/register --ignore-watch server.bundle.js --ignore-watch manifest.json --no-notify --prefer-ts src/index.ts",
-    "start": "NODE_ENV=production node -r module-alias/register lib/serve/src/index.js"
+    "start": "NODE_ENV=production node -r module-alias/register lib/serve/src/index.js",
+    "generate-self-certs": "./scripts/certificates.sh"
   }
 }

@@ -1,0 +1,68 @@
+
+SUBJECT="/C=US/ST=Minnesota/L=Richfield/O=ProtiumNetwork/OU=Org/CN=protium.dev"
+CWD=$(pwd -P)
+KEYDIR="$CWD/keys"
+SCRIPTDIR="$CWD/scripts"
+mkdir -p "$KEYDIR"
+
+if [ ! -f "$KEYDIR/rootCA.key.pem" ];
+then
+  echo "Generating certificate authority..."
+  openssl genrsa \
+    -out "$KEYDIR/rootCA.key.pem" \
+    4096
+
+  openssl req -new -newkey rsa:4096 \
+    -days 3650 \
+    -x509 \
+    -new \
+    -nodes \
+    -key "$KEYDIR/rootCA.key.pem" \
+    -out "$KEYDIR/rootCA.crt.pem" \
+    -sha256 \
+    -subj $SUBJECT
+else
+  echo "Skipping certificate authority generation..."
+fi
+
+function genSelfSigned {
+  CN="$1.protium.dev"
+  echo "Generating private key for: $CN"
+  openssl genrsa \
+    -out "$KEYDIR/$1.private.key.pem" \
+    4096
+
+  echo "Generating csr for: $CN"
+  openssl req -new \
+    -key "$KEYDIR/$1.private.key.pem" \
+    -out "$KEYDIR/$1.csr.pem" \
+    -config "$SCRIPTDIR/ssl.conf" \
+    -sha256 \
+    -subj $SUBJECT
+
+  echo "Validating csr: $CN"
+  openssl req -text -noout -in "$KEYDIR/$1.csr.pem"
+
+  echo "Generating cert for: $CN"
+  openssl x509 -req \
+    -in "$KEYDIR/$1.csr.pem" \
+    -CA "$KEYDIR/rootCA.crt.pem" \
+    -CAkey "$KEYDIR/rootCA.key.pem" \
+    -CAcreateserial \
+    -out "$KEYDIR/$1.crt.pem" \
+    -days 3650 \
+    -extensions req_ext \
+    -sha256 \
+    -extfile "$SCRIPTDIR/ssl.conf"
+
+  echo "Generating public key for: $CN"
+  openssl rsa \
+    -in "$KEYDIR/$1.private.key.pem" \
+    -pubout -out "$KEYDIR/$1.public.key.pem"
+
+  echo "Removing csr for $CN"
+  rm -f "$KEYDIR/$1.csr.pem"
+}
+
+genSelfSigned "app"
+# genSelfSigned "api"

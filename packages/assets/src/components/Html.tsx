@@ -7,6 +7,14 @@ interface IHtmlProps {
   initialProps?: any
 }
 
+const globalStyles = `
+  html,
+  body,
+  #app-container,
+  [data-reactroot],
+  [data-reactroot] > div {height: 100%}
+`
+
 export default function Html (props: IHtmlProps) {
   const {appName, initialProps} = props
   const {element, getStyleElement} = AppRegistry.getApplication(appName, {
@@ -15,13 +23,19 @@ export default function Html (props: IHtmlProps) {
 
   const html = renderToString(element)
 
-  return <html>
+  return <html lang='en'>
     <head>
+      <title>Protium</title>
+      <meta charSet='utf8' />
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <meta name='description' content='A universal app for awesomeness' />
+      <link rel='manifest' href='/assets/manifest.json' />
+      <script async src='/assets/browser.bundle.js' />
+      <style id='global-styles' dangerouslySetInnerHTML={{__html: globalStyles}} />
       {getStyleElement()}
     </head>
     <body>
       <div id='app-container' dangerouslySetInnerHTML={{__html: html}} />
-      <script async src='/assets/browser.bundle.js' />
     </body>
   </html>
 }

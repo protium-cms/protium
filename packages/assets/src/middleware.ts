@@ -43,7 +43,7 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
   }
 
   const moduleDirectory = Path.resolve(context, 'lib')
-  const manifestPath = Path.join(moduleDirectory, 'manifest.json')
+  const manifestPath = Path.join(moduleDirectory, 'server.manifest.json')
 
   return [
     resolverMiddleware,
@@ -85,6 +85,9 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
     const appName: string = res.locals.appName
     const appInstance = React.createElement(Html, {appName})
     const appStream = renderToStaticNodeStream(appInstance)
+    res.status(200)
+    res.type('html')
+    res.write(`<!doctype html>`)
     return appStream.pipe(res)
   }
 }

@@ -2,20 +2,20 @@ import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/midd
 import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
+import helmet from 'helmet'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
+import favicon from 'serve-favicon'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
+// const APP_MODULE = '@protium/app'
+const ASSET_MODULE = '@protium/assets'
+// const WEB_MODULE = '@protium/web'
 
-const middlewareOpts = {
-  assetsModule: '@protium/assets',
-  module: '@protium/app',
-}
-
-const assetPath = Path.resolve(resolvePkg(middlewareOpts.assetsModule), 'lib')
-
+const assetModule = resolvePkg(ASSET_MODULE)
 export const app = Express()
 
+app.use(helmet())
 app.use(compression())
 app.use(json({strict: true}))
 
@@ -23,17 +23,21 @@ if (DEVELOPMENT) {
   app.use(createDevMiddleware())
 }
 
-app.use('/assets', Express.static(assetPath, {fallthrough: false}))
-app.get('/*', createSSRMiddleware())
+app.use(favicon(Path.join(assetModule, 'assets', 'favicon.ico')))
 
-app.get('/', (req, res) => {
-  res.send(`
-    <style>
-      html, body, #app-container {
-        height: 100%;
-      }
-    </style>
-    <div id="app-container"></div>
-    <script src="/assets/browser.bundle.js"></script>
-  `)
-})
+app.get('/robots.txt', (req, res) => res.send(`
+  User-agent: *
+  Disallow:
+`))
+
+app.use('/assets', Express.static(
+  Path.join(assetModule, 'lib'),
+  {
+    fallthrough: false,
+    setHeaders (res) {
+      res.setHeader('Cache-Control', 'public,max-age=31536000,immutable')
+    },
+  },
+))
+
+app.use('/*', createSSRMiddleware())
