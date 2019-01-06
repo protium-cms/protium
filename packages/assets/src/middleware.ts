@@ -34,6 +34,42 @@ const defaultOpts = {
   serverBundleName: 'server',
 }
 
+export function createDevMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
+  const opts = {...defaultOpts, ...options}
+  const browserConfig = assetConfig.find((c: Webpack.Configuration) => {
+    return c.name === opts.browserBundleName
+  })
+
+  if (!browserConfig) {
+    throw new Error(`Unable to find browser webpack config: ${opts.browserBundleName}`)
+  }
+
+  const serverConfig = assetConfig.find((c: Webpack.Configuration) => {
+    return c.name === opts.serverBundleName
+  })
+
+  if (!serverConfig) {
+    throw new Error(`Unable to find browser webpack config: ${opts.serverBundleName}`)
+  }
+
+  const browserCompiler = buildBrowserCompiler(browserConfig, opts.browserBundleName, opts.publicPath)
+  const serverCompiler = buildServerCompiler(serverConfig, opts.serverBundleName)
+
+  return [
+    WebpackDevMiddleware(serverCompiler, {
+      logLevel: 'warn',
+      publicPath: opts.publicPath,
+      serverSideRender: true,
+      writeToDisk: true,
+    }),
+    WebpackDevMiddleware(browserCompiler, {
+      logLevel: 'warn',
+      publicPath: opts.publicPath,
+    }),
+    WebpackHotMiddleware(browserCompiler),
+  ]
+}
+
 export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
   const opts = {...defaultOpts, ...options}
   const context = resolvePkg(opts.assetsModule)
@@ -90,42 +126,6 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
     res.write(`<!doctype html>`)
     return appStream.pipe(res)
   }
-}
-
-export function createDevMiddleware (options: IWebpackMiddlewareOptions = defaultOpts) {
-  const opts = {...defaultOpts, ...options}
-  const browserConfig = assetConfig.find((c: Webpack.Configuration) => {
-    return c.name === opts.browserBundleName
-  })
-
-  if (!browserConfig) {
-    throw new Error(`Unable to find browser webpack config: ${opts.browserBundleName}`)
-  }
-
-  const serverConfig = assetConfig.find((c: Webpack.Configuration) => {
-    return c.name === opts.serverBundleName
-  })
-
-  if (!serverConfig) {
-    throw new Error(`Unable to find browser webpack config: ${opts.serverBundleName}`)
-  }
-
-  const browserCompiler = buildBrowserCompiler(browserConfig, opts.browserBundleName, opts.publicPath)
-  const serverCompiler = buildServerCompiler(serverConfig, opts.serverBundleName)
-
-  return [
-    WebpackDevMiddleware(serverCompiler, {
-      logLevel: 'warn',
-      publicPath: opts.publicPath,
-      serverSideRender: true,
-      writeToDisk: true,
-    }),
-    WebpackDevMiddleware(browserCompiler, {
-      logLevel: 'warn',
-      publicPath: opts.publicPath,
-    }),
-    WebpackHotMiddleware(browserCompiler),
-  ]
 }
 
 function buildBrowserCompiler (config: IAppWebpackConfig, entrypoint: string, publicPath: string) {

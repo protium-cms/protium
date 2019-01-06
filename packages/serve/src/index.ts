@@ -6,6 +6,7 @@ import Spdy, {ServerOptions} from 'spdy'
 
 const port = process.env.PORT || 3000
 const apiPort = process.env.API_PORT || 3001
+const env = process.env.NODE_ENV
 
 const options: ServerOptions = {
   // ca: getCertType('rootCA', 'crt'),
@@ -14,11 +15,11 @@ const options: ServerOptions = {
 }
 
 Spdy.createServer(options, app).listen(port, () => {
-  console.log(`[web] listening on port ${port}`)
+  console.log(`[web] listening on port ${port} in ${env} mode`)
 })
 
 Spdy.createServer(options, api).listen(apiPort, () => {
-  console.log(`[api] listening on port ${apiPort}`)
+  console.log(`[api] listening on port ${apiPort} in ${env} mode`)
 })
 
 function getCertType (target: string, type: 'key' | 'crt' | 'pem'): string | undefined {

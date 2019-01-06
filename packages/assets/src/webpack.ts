@@ -11,6 +11,7 @@ import {IAppWebpackConfig} from './middleware'
 
 const APP_PACKAGE = '@protium/app'
 const ASSET_PACKAGE = '@protium/assets'
+const PROJECT_ROOT = Path.resolve('../../')
 const PRODUCTION = process.env.NODE_ENV === 'production'
 enum ConfigTargets {
   Browser = 'browser',
@@ -35,10 +36,10 @@ function config (target: ConfigTargets): IAppWebpackConfig {
     ? './browser' : './index'
 
   const c: IAppWebpackConfig = {
-    context: Path.resolve('../..'),
+    context: Path.join(appContext, 'src'),
     devtool: 'source-map',
     entry: {
-      [target]: [Path.join(appContext, 'src', entryFile)],
+      [target]: [entryFile],
     },
     module: {
       rules: [
@@ -48,7 +49,23 @@ function config (target: ConfigTargets): IAppWebpackConfig {
     name: target,
     output: {
       filename: '[name].bundle.js',
-      path: Path.resolve(assetContext, 'lib'),
+      path: Path.join(assetContext, 'lib'),
+      devtoolModuleFilenameTemplate (info) {
+        let modulePath: string | null = null
+
+        if (info.identifier.startsWith('external ')) {
+          const modName = JSON.parse(info.identifier.replace('external ', ''))
+          if (modName) {
+            modulePath = require.resolve(modName)
+          }
+        }
+
+        if (!modulePath) {
+          modulePath = info.absoluteResourcePath
+        }
+
+        return `webpack:///./${Path.relative(PROJECT_ROOT, modulePath)}`
+      },
     },
     performance: {
       hints: false,
@@ -66,7 +83,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
       },
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
-    stats: 'normal',
+    stats: 'errors-only',
   }
 
   if (target === ConfigTargets.Browser) {

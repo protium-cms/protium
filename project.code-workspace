@@ -47,12 +47,11 @@
         "type": "chrome",
         "request": "launch",
         "name": "Browser",
-        "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder:Assets}/lib/browser.bundle.js",
+        "url": "https://app.protium.dev:3000",
+        "webRoot": "${workspaceFolder:Project}",
         "sourceMapPathOverrides": {
-          "webpack:///./~/*": "./node_modules/*",
-          "webpack:///./*": "./packages/app/src/*",
-          "webpack:///*": "*"
+          "webpack:///./packages/src/app": "${workspaceFolder:App}/src/*",
+          "webpack:///./*": "${workspaceFolder:Project}/*"
         }
       },
       {
@@ -60,11 +59,16 @@
         "request": "launch",
         "name": "App Server",
         "cwd": "${workspaceFolder:App Server}",
+        "env": {
+          "NODE_ENV": "development",
+        },
         "runtimeArgs": [
           "-r",
           "ts-node/register",
           "-r",
-          "tsconfig-paths/register"
+          "tsconfig-paths/register",
+          "-r",
+          "module-alias/register"
         ],
         "args": [
           "src/index.ts"

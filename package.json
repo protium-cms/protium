@@ -42,7 +42,7 @@
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\"",
     "clean-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "yarn && lerna bootstrap",
-    "build": "lerna run build && lerna run build:web",
+    "build": "lerna run build --stream && lerna run build:web --stream",
     "build-image": "yarn clean && docker build --no-cache .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
     "push-ci-image": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",
