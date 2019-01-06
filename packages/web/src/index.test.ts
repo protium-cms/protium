@@ -1,6 +1,6 @@
 import {app} from '.'
 
-describe('app', () => {
+describe('web', () => {
   it('should export an express-like object', () => {
     expect(typeof app.get).toBe('function')
   })

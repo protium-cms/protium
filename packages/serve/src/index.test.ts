@@ -1,6 +1,9 @@
 import {api} from '@protium/api'
 import {app} from '@protium/web'
+import mockConsole from 'jest-mock-console'
 import Spdy from 'spdy'
+
+mockConsole()
 
 import {mockCreateServer, mockListen} from './__mocks__/spdy'
 import {handleApiStartup, handleAppStartup, options} from './index'
@@ -8,7 +11,6 @@ import {handleApiStartup, handleAppStartup, options} from './index'
 jest.mock('spdy')
 
 describe('entrypoint', () => {
-
   it('should create api & app servers', () => {
     expect(Spdy.createServer).toHaveBeenCalledTimes(2)
     expect(mockCreateServer).toHaveBeenNthCalledWith(1, options, app)
