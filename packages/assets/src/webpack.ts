@@ -3,12 +3,14 @@ import Fs from 'fs'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import Webpack from 'webpack'
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import ManifestPlugin from 'webpack-manifest-plugin'
 import nodeExternals from 'webpack-node-externals'
 import {IAppWebpackConfig} from './middleware'
 
 const APP_PACKAGE = '@protium/app'
 const ASSET_PACKAGE = '@protium/assets'
+const PRODUCTION = process.env.NODE_ENV === 'production'
 
 const webpackConfig: IAppWebpackConfig[] = [
   config('browser'),
@@ -17,7 +19,9 @@ const webpackConfig: IAppWebpackConfig[] = [
 
 export = webpackConfig
 
-function config (target: 'browser' | 'server'): IAppWebpackConfig {
+type ConfigTargets = 'browser' | 'server'
+
+function config (target: ConfigTargets): IAppWebpackConfig {
   const packageContext = resolvePkg(APP_PACKAGE)
   const assetContext = resolvePkg(ASSET_PACKAGE)
   if (!packageContext) {
@@ -36,7 +40,7 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
     },
     module: {
       rules: [
-        babelRule(moduleContext),
+        babelRule(moduleContext, target),
       ],
     },
     name: target,
@@ -48,6 +52,7 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
       hints: false,
     },
     plugins: [
+      new Webpack.IgnorePlugin(/react-art/),
       new Webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       }),
@@ -56,19 +61,29 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
       alias: {
         'react-native': 'react-native-web',
       },
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
+    stats: 'minimal',
   }
 
   if (target === 'browser') {
-    c.plugins!.unshift(
-      new ForkTsCheckerWebpackPlugin({
-        async: true,
-        tsconfig: Path.join(moduleContext, 'tsconfig.json'),
-        tslint: Path.resolve('../../tslint.json'),
-        workers: ForkTsCheckerWebpackPlugin.ONE_CPU,
-      }),
-    )
+    c.target = 'web'
+    if (PRODUCTION) {
+      c.plugins!.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        generateStatsFile: true,
+        openAnalyzer: false,
+      }))
+    } else {
+      c.plugins!.unshift(
+        new ForkTsCheckerWebpackPlugin({
+          async: true,
+          tsconfig: Path.join(moduleContext, 'tsconfig.build.json'),
+          tslint: Path.resolve('../../tslint.json'),
+          workers: ForkTsCheckerWebpackPlugin.ONE_CPU,
+        }),
+      )
+    }
   }
 
   if (target === 'server') {
@@ -86,29 +101,53 @@ function config (target: 'browser' | 'server'): IAppWebpackConfig {
   return c
 }
 
-function babelRule (context: string): Webpack.Rule {
+function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
+  const babelConfig = {
+    babelrc: false,
+    cacheDirectory: true,
+    plugins: [
+      [
+        '@babel/plugin-transform-runtime',
+        {
+          // "corejs": false,
+          // "helpers": true,
+          // "regenerator": true,
+          useESModules: true,
+        },
+      ],
+      ['@babel/plugin-proposal-decorators', {legacy: true}],
+      ['@babel/plugin-proposal-class-properties', {loose: true}],
+      'react-hot-loader/babel',
+    ],
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: target === 'server'
+            ? {
+              esmodules: false,
+              node: 'current',
+            }
+            : {
+              esmodules: true,
+            },
+        },
+      ],
+      '@babel/preset-typescript',
+      '@babel/preset-react',
+    ],
+  }
+
+  // if (PRODUCTION) {
+  //   babelConfig.presets.push('babel-preset-minify')
+  // }
+
   return {
     include: context,
-    test: /\.(j|t)sx?$/,
+    test: /\.(m?j|t)sx?$/,
     use: {
       loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        cacheDirectory: true,
-        plugins: [
-          ['@babel/plugin-proposal-decorators', {legacy: true}],
-          ['@babel/plugin-proposal-class-properties', {loose: true}],
-          'react-hot-loader/babel',
-        ],
-        presets: [
-          [
-            '@babel/preset-env',
-            {targets: {browsers: 'last 2 versions'}},
-          ],
-          '@babel/preset-typescript',
-          '@babel/preset-react',
-        ],
-      },
+      options: babelConfig,
     },
   }
 }

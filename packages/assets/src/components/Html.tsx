@@ -21,7 +21,7 @@ export default function Html (props: IHtmlProps) {
     </head>
     <body>
       <div id='app-container' dangerouslySetInnerHTML={{__html: html}} />
-      <script src='/assets/browser.bundle.js' />
+      <script async src='/assets/browser.bundle.js' />
     </body>
   </html>
 }

@@ -37,7 +37,9 @@
     "tsfmt.tslint.autoFix": "enabled",
     "tslint.ignoreDefinitionFiles": true,
     "workbench.panel.defaultLocation": "right",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false
   },
   "launch": {
     "configurations": [

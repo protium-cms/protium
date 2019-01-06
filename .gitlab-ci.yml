@@ -25,6 +25,7 @@ stages:
   - setup
   - test
   - build
+  - deploy
 
 "Install Dependencies":
   stage: setup
@@ -56,8 +57,17 @@ stages:
     reports:
       junit: report-unit-tests.xml
 
-"Build Image":
+"Build Application":
   stage: build
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - packages/assets/lib/report.html
+      - packages/assets/lib/stats.json
+
+"Build Image":
+  stage: deploy
   before_script:
     - echo $GCLOUD_SERVICE_KEY > $HOME/gcloud-service-key.json
     - echo $CI_JOB_TOKEN > $HOME/.ci-job-token
