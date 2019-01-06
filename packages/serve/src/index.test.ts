@@ -1,15 +1,24 @@
-jest.mock('@protium/api', () => ({api: {listen: jest.fn()}}))
-jest.mock('@protium/web', () => ({app: {listen: jest.fn()}}))
-
 import {api} from '@protium/api'
 import {app} from '@protium/web'
-import '.'
+import Spdy from 'spdy'
+
+import {mockCreateServer, mockListen} from './__mocks__/spdy'
+import {handleApiStartup, handleAppStartup, options} from './index'
+
+jest.mock('spdy')
 
 describe('entrypoint', () => {
-  it('app should start up', () => {
-    expect(app.listen).toHaveBeenCalled()
+
+  it('should create api & app servers', () => {
+    expect(Spdy.createServer).toHaveBeenCalledTimes(2)
+    expect(mockCreateServer).toHaveBeenNthCalledWith(1, options, app)
+    expect(mockCreateServer).toHaveBeenNthCalledWith(2, options, api)
   })
-  it('api should start up', () => {
-    expect(api.listen).toHaveBeenCalled()
+
+  it('should startup the servers by listening', () => {
+    expect(mockListen).toHaveBeenCalledTimes(2)
+    expect(mockListen).toHaveBeenNthCalledWith(1, 3000, handleAppStartup)
+    expect(mockListen).toHaveBeenNthCalledWith(2, 3001, handleApiStartup)
   })
+
 })

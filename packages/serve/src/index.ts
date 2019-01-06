@@ -8,19 +8,25 @@ const port = process.env.PORT || 3000
 const apiPort = process.env.API_PORT || 3001
 const env = process.env.NODE_ENV
 
-const options: ServerOptions = {
+export const options: ServerOptions = {
   // ca: getCertType('rootCA', 'crt'),
   cert: getCertType('app', 'crt'),
   key: getCertType('app', 'key'),
 }
 
-Spdy.createServer(options, app).listen(port, () => {
-  console.log(`[web] listening on port ${port} in ${env} mode`)
-})
+export const appServer = Spdy.createServer(options, app)
+export const apiServer = Spdy.createServer(options, api)
 
-Spdy.createServer(options, api).listen(apiPort, () => {
+appServer.listen(port, handleAppStartup)
+apiServer.listen(apiPort, handleApiStartup)
+
+export function handleAppStartup () {
+  console.log(`[web] listening on port ${port} in ${env} mode`)
+}
+
+export function handleApiStartup () {
   console.log(`[api] listening on port ${apiPort} in ${env} mode`)
-})
+}
 
 function getCertType (target: string, type: 'key' | 'crt' | 'pem'): string | undefined {
   const envKey = `${target.toUpperCase()}_${type.toUpperCase()}`
@@ -32,7 +38,8 @@ function getCertType (target: string, type: 'key' | 'crt' | 'pem'): string | und
 
   console.log(`${envKey} not found, looking for .pem file...`)
   const keyName = `${target}.${type === 'key' ? `private.${type}` : type}.pem`
-  const keyPath = Path.resolve('keys', keyName)
+  const keyPath = Path.resolve(__dirname, '..', 'keys', keyName)
+
   if (Fs.existsSync(keyPath)) {
     console.log(`Found ${keyName}, using file.`)
     return Fs.readFileSync(keyPath, 'utf8')
