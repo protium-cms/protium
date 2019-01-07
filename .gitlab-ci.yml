@@ -18,6 +18,8 @@ cache:
     - "packages/api/node_modules/"
     - "packages/app/node_modules/"
     - "packages/assets/node_modules/"
+    - "packages/cli/node_modules/"
+    - "packages/config/node_modules/"
     - "packages/serve/node_modules/"
     - "packages/web/node_modules/"
 
@@ -30,8 +32,7 @@ stages:
 "Install Dependencies":
   stage: setup
   script:
-    - yarn
-    - yarn bootstrap
+    - yarn bootstrap:ci
 
 "Audit Dependencies":
   allow_failure: true

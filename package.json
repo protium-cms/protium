@@ -49,6 +49,7 @@
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\" \"**/yarn-error.log\"",
     "clean-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
     "bootstrap": "yarn && lerna bootstrap",
+    "bootstrap:ci": "yarn --production=false --frozen-lockfile && lerna bootstrap -- --frozen-lockfile --production=false",
     "build": "lerna run build --stream && lerna run build:web --stream",
     "build-image": "yarn clean && docker build .",
     "build-ci-image": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
