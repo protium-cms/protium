@@ -21,6 +21,14 @@
       "path": "packages/serve"
     },
     {
+      "name": "CLI",
+      "path": "packages/cli"
+    },
+    {
+      "name": "Config",
+      "path": "packages/config"
+    },
+    {
       "name": "Custom Types",
       "path": "packages/types"
     },
@@ -39,7 +47,12 @@
     "workbench.panel.defaultLocation": "right",
     "editor.formatOnSave": true,
     "gitlens.codeLens.recentChange.enabled": false,
-    "gitlens.codeLens.authors.enabled": false
+    "gitlens.codeLens.authors.enabled": false,
+    // Doesn't support multi-root workspaces :(
+    // "jest.debugMode": false,
+    // "jest.coverageFormatter": "GutterFormatter",
+    // "jest.pathToJest": "/Users/jonjaques/Dev/protium/node_modules/.bin/jest",
+    // "jest.runAllTestsFirst": true,
   },
   "launch": {
     "configurations": [

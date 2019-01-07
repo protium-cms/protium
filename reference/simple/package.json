@@ -1,0 +1,14 @@
+{
+  "name": "protium-simple-reference",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@protium/cli": "^0.0.1",
+    "@protium/serve": "^0.0.1"
+  },
+  "scripts": {
+    "dev": "protium dev",
+    "start": "protium start",
+    "test": "jest"
+  }
+}

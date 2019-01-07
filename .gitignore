@@ -370,5 +370,6 @@ lib
 keys
 .env
 secrets.yaml
+*local.yaml
 report*.xml
 .jest

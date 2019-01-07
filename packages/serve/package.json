@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@protium/api": "^0.0.1",
+    "@protium/config": "^0.0.1",
     "@protium/web": "^0.0.1",
     "@types/node": "^10.12.18",
     "@types/spdy": "^3.4.4",

@@ -1,0 +1,26 @@
+{
+  "name": "@protium/cli",
+  "version": "0.0.1",
+  "author": "Jon Jaques <jaquers@gmail.com>",
+  "main": "lib/index.js",
+  "source": "src/index.ts",
+  "bin": {
+    "protium-dev": "./bin/protium-dev.js",
+    "protium": "./bin/protium.js"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=10",
+    "yarn": ">=1.7"
+  },
+  "dependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/yargs": "^12.0.5",
+    "chalk": "^2.4.2",
+    "ts-node": "^7.0.1",
+    "yargs": "^12.0.5"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

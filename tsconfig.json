@@ -1,4 +1,7 @@
 {
+  "exclude": [
+    "reference"
+  ],
   "compilerOptions": {
     "target": "ES2018",
     "module": "commonjs",
@@ -32,6 +35,18 @@
       ],
       "@protium/assets/lib/*": [
         "assets/src/*"
+      ],
+      "@protium/cli": [
+        "cli/src"
+      ],
+      "@protium/cli/lib/*": [
+        "cli/src/*"
+      ],
+      "@protium/config": [
+        "config/src"
+      ],
+      "@protium/config/lib/*": [
+        "config/src/*"
       ],
       "@protium/serve": [
         "serve/src"
