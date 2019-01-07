@@ -37,7 +37,7 @@ COPY patches ./patches
 COPY packages ./packages
 
 # install dependencies and compile to js
-RUN yarn
+RUN yarn --production=false
 RUN yarn bootstrap
 RUN yarn build
 
