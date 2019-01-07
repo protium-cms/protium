@@ -75,6 +75,7 @@ stages:
     - docker login -u _json_key --password-stdin $GCLOUD_REGISTRY < $HOME/gcloud-service-key.json
     - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
   script:
+    - yarn clean
     - docker pull $CONTAINER_RELEASE_IMAGE
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE

@@ -17,31 +17,37 @@ ENV NODE_ENV $NODE_ENV
 # default to port 3000 for node
 # and 9229 and 9230 (tests) for debug
 ARG PORT=3000
+ARG API_PORT=3001
 ENV PORT $PORT
-EXPOSE $PORT 9229 9230
+ENV API_PORT $API_PORT
+EXPOSE $PORT $API_PORT 9229 9230
 
 # set context to app directory
 WORKDIR /app
+# RUN chown -R node:node .
 
 # app dependencies
 COPY package.json .
 COPY lerna.json .
 COPY tsconfig.json .
 COPY yarn.lock .
-COPY patches .
+COPY patches ./patches
 
 # app code
-COPY packages .
+COPY packages ./packages
 
 # install dependencies and compile to js
 RUN yarn
 RUN yarn bootstrap
 RUN yarn build
 
+# reset modules to only prod dependencies
+# ENV NODE_ENV $NODE_ENV
+# RUN yarn --${NODE_ENV}}
+
 ENTRYPOINT ["/tini", "--"]
 
 # run node as a non-priviledged user
 USER node
-# RUN chown -R node:node .
 
 CMD ["yarn", "start"]

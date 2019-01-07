@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    # image: <tag>
     build:
       context: .
       args:
@@ -8,5 +9,6 @@ services:
     command: yarn dev
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - .:/app
