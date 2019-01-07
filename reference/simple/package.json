@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@protium/assets": "^0.0.1",
     "@protium/cli": "^0.0.1",
     "@protium/serve": "^0.0.1"
   },
@@ -10,5 +11,8 @@
     "dev": "protium dev",
     "start": "protium start",
     "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }

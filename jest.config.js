@@ -53,7 +53,7 @@ function configureProject(pkg) {
       testMatch: c.testMatch,
       preset: 'react-native',
       setupFiles: [
-        '<rootDir>/enzyme.config.ts'
+        '<rootDir>/test/enzyme.config.ts'
       ],
       transform: {
         ...tsJest.transform,

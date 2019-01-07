@@ -14,13 +14,22 @@
     "yarn": ">=1.7"
   },
   "dependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/yargs": "^12.0.5",
     "chalk": "^2.4.2",
-    "ts-node": "^7.0.1",
+    "resolve-pkg": "^1.0.0",
     "yargs": "^12.0.5"
   },
+  "peerDependencies": {
+    "@protium/assets": "^0.0.1",
+    "@protium/serve": "^0.0.1"
+  },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/lodash": "^4.14.119",
+    "@types/yargs": "^12.0.5",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }

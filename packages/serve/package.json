@@ -10,8 +10,10 @@
     "yarn": ">=1.7"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.119",
     "ts-node-dev": "^1.0.0-pre.32",
-    "tsconfig-paths": "^3.7.0"
+    "tsconfig-paths": "^3.7.0",
+    "typescript": "^3.2.2"
   },
   "dependencies": {
     "@protium/api": "^0.0.1",
@@ -19,9 +21,10 @@
     "@protium/web": "^0.0.1",
     "@types/node": "^10.12.18",
     "@types/spdy": "^3.4.4",
+    "lodash": "^4.17.11",
     "module-alias": "^2.1.0",
-    "spdy": "^4.0.0",
-    "typescript": "^3.2.2"
+    "resolve-pkg": "^1.0.0",
+    "spdy": "^4.0.0"
   },
   "_moduleAliases": {
     "react-native": "node_modules/react-native-web"
