@@ -1,5 +1,10 @@
 env: development
 
+db:
+  client: 'sqlite3'
+  connection:
+    filename: 'db/data/default_db.sqlite'
+
 api:
   port: 3001
 

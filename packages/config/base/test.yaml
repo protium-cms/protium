@@ -1,1 +1,6 @@
 env: test
+
+db:
+  client: 'sqlite3'
+  connection:
+    filename: 'db/data/test_db.sqlite'

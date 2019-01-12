@@ -1,1 +1,9 @@
 env: development
+
+db:
+  client: 'pg'
+  connection:
+    database: 'protium_dev'
+    # host: '127.0.0.1'
+    # user: 'your_database_user'
+    # password: 'your_database_password'

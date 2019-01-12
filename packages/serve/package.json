@@ -31,8 +31,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "dev": "tsnd -r tsconfig-paths/register -r module-alias/register --ignore-watch server.bundle.js --ignore-watch manifest.json --no-notify --prefer-ts src/index.ts",
-    "start": "NODE_ENV=production node -r module-alias/register lib/serve/src/index.js",
+    "dev": "tsnd -r tsconfig-paths/register -r module-alias/register --ignore-watch server.bundle.js --ignore-watch manifest.json --no-notify --prefer-ts src",
+    "start": "NODE_ENV=production node lib/serve/src",
     "generate-self-certs": "./scripts/certificates.sh"
   }
 }

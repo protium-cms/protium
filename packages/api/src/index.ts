@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
+import db from './db'
 
 export const api = Express()
 

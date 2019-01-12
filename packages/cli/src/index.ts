@@ -1,7 +1,9 @@
 import Chalk from 'chalk'
 import Yargs from 'yargs'
 
+import dev from './commands/dev'
 import start from './commands/start'
+
 const logo = `                  __  _
    ___  _______  / /_(_)_ ____ _
   / _ \\/ __/ _ \\/ __/ / // /  ' \\
@@ -15,6 +17,7 @@ console.log(entry)
 const program = Yargs
   .scriptName(Chalk.bold('protium'))
   .usage('Usage: $0 <command> [options]')
+  .command(dev)
   .command(start)
   .help('help', 'Show help')
   .showHelpOnFail(true)
