@@ -1,6 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "baseUrl": "./src",
   "exclude": [
     "lib",
     "**/__mocks__",

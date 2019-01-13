@@ -23,8 +23,21 @@ const packages = Fs.readdirSync(packagesPath)
 for (const name of packages) {
   const path = Path.join(packagesPath, name)
   const pkg = require(Path.join(path, 'package.json')) // tslint:disable-line
-  config.compilerOptions.paths[Path.join('@protium', name, '*')] = [Path.join('..', name, 'lib')]
-  config.compilerOptions.paths[Path.join('@protium', name)] = [Path.join('..', name, 'lib')]
+
+  const paths = [
+    Path.join('../', name, 'src'),
+    // Path.join('..', name, 'lib'),
+  ]
+
+  const allPaths = [
+    Path.join('../', name, 'src', '*'),
+    // Path.join('..', name, 'lib', '*'),
+  ]
+
+  // config.compilerOptions.paths[Path.join('@protium', name, 'lib', '*')] = paths
+  // config.compilerOptions.paths[Path.join('@protium', name, 'lib')] = paths
+  config.compilerOptions.paths[Path.join('@protium', name)] = paths
+  config.compilerOptions.paths[Path.join('@protium', name, 'lib', '*')] = allPaths
 }
 
 Fs.writeFileSync(

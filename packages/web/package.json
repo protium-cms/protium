@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "lib/index.js",
-  "source": "src/index.ts",
+  "main": "./lib/index.js",
+  "source": "./src/index.ts",
   "engines": {
     "node": ">=10",
     "yarn": ">=1.7"
@@ -23,6 +23,9 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json"
+  },
+  "_moduleAliases": {
+    "react-native": "node_modules/react-native-web"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",

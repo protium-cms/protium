@@ -1,0 +1,39 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Browser",
+      "url": "https://app.protium.dev:3000",
+      "webRoot": "${workspaceFolder}/packages/app",
+      "sourceMapPathOverrides": {
+        "webpack:///./packages/src/app": "${workspaceFolder}/packages/app/src/*",
+        "webpack:///./*": "${workspaceFolder}/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "App Server",
+      "env": {
+        "NODE_ENV": "development",
+      },
+      "autoAttachChildProcesses": true,
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "protium",
+        "debug"
+      ],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Application",
+      "configurations": [
+        "Browser",
+        "App Server"
+      ]
+    }
+  ]
+}

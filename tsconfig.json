@@ -5,47 +5,47 @@
       "*": [
         "types/*"
       ],
-      "@protium/api/*": [
-        "../api/lib"
-      ],
       "@protium/api": [
-        "../api/lib"
+        "../api/src"
       ],
-      "@protium/app/*": [
-        "../app/lib"
+      "@protium/api/lib/*": [
+        "../api/src/*"
       ],
       "@protium/app": [
-        "../app/lib"
+        "../app/src"
       ],
-      "@protium/assets/*": [
-        "../assets/lib"
+      "@protium/app/lib/*": [
+        "../app/src/*"
       ],
       "@protium/assets": [
-        "../assets/lib"
+        "../assets/src"
       ],
-      "@protium/cli/*": [
-        "../cli/lib"
+      "@protium/assets/lib/*": [
+        "../assets/src/*"
       ],
       "@protium/cli": [
-        "../cli/lib"
+        "../cli/src"
       ],
-      "@protium/config/*": [
-        "../config/lib"
+      "@protium/cli/lib/*": [
+        "../cli/src/*"
       ],
       "@protium/config": [
-        "../config/lib"
+        "../config/src"
       ],
-      "@protium/serve/*": [
-        "../serve/lib"
+      "@protium/config/lib/*": [
+        "../config/src/*"
       ],
       "@protium/serve": [
-        "../serve/lib"
+        "../serve/src"
       ],
-      "@protium/web/*": [
-        "../web/lib"
+      "@protium/serve/lib/*": [
+        "../serve/src/*"
       ],
       "@protium/web": [
-        "../web/lib"
+        "../web/src"
+      ],
+      "@protium/web/lib/*": [
+        "../web/src/*"
       ]
     }
   }

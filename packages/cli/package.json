@@ -2,8 +2,8 @@
   "name": "@protium/cli",
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
-  "main": "lib/index.js",
-  "source": "src/index.ts",
+  "main": "./lib/index.js",
+  "source": "./src/index.ts",
   "bin": {
     "protium-dev": "./bin/protium-dev.js",
     "protium": "./bin/protium.js"
@@ -25,11 +25,15 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json"
   },
+  "_moduleAliases": {
+    "react-native": "node_modules/react-native-web"
+  },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.119",
     "@types/yargs": "^12.0.5",
     "ts-node": "^7.0.1",
+    "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.2.2"
   }
 }

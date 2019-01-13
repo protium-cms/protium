@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "lib/serve/src/index.js",
-  "source": "src/index.ts",
+  "main": "./lib/index.js",
+  "source": "./src/index.ts",
   "engines": {
     "node": ">=10",
     "yarn": ">=1.7"
@@ -32,7 +32,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsnd -r tsconfig-paths/register -r module-alias/register --ignore-watch server.bundle.js --ignore-watch manifest.json --no-notify --prefer-ts src",
-    "start": "NODE_ENV=production node lib/serve/src",
+    "start": "node ./lib/index",
     "generate-self-certs": "./scripts/certificates.sh"
   }
 }

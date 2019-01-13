@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 SUBJECT="/C=US/ST=Minnesota/L=Richfield/O=ProtiumNetwork/OU=Org/CN=protium.dev"
 CWD=$(pwd -P)

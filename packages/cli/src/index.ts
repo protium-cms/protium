@@ -1,6 +1,7 @@
 import Chalk from 'chalk'
 import Yargs from 'yargs'
 
+import {command as debug} from './commands/debug'
 import dev from './commands/dev'
 import start from './commands/start'
 
@@ -17,6 +18,7 @@ console.log(entry)
 const program = Yargs
   .scriptName(Chalk.bold('protium'))
   .usage('Usage: $0 <command> [options]')
+  .command(debug)
   .command(dev)
   .command(start)
   .help('help', 'Show help')

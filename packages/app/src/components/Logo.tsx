@@ -11,6 +11,6 @@ const Protium = styled(Text)`
 
 export default function Logo () {
   return <Protium>
-    Protium
+    Protium bye bye
   </Protium>
 }

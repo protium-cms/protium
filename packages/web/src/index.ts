@@ -27,8 +27,10 @@ app.use(favicon(Path.join(assetModule, 'assets', 'favicon.ico')))
 
 app.get('/robots.txt', (req, res) => res.send(`
   User-agent: *
-  Disallow:
+  Disallow: stuff
 `))
+
+console.log('stuff')
 
 app.use('/assets', Express.static(
   Path.join(assetModule, 'lib'),

@@ -1,0 +1,15 @@
+{
+  "npm.runInTerminal": true,
+  "npm.packageManager": "yarn",
+  "npm.enableScriptExplorer": true,
+  "breadcrumbs.enabled": true,
+  "tsfmt.tslint.autoFix": "enabled",
+  "tslint.ignoreDefinitionFiles": true,
+  "workbench.panel.defaultLocation": "right",
+  "editor.formatOnSave": true,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "jest.coverageFormatter": "GutterFormatter",
+  // "jest.pathToJest": "${workspaceFolder}/node_modules/.bin/jest",
+  "jest.runAllTestsFirst": false,
+}

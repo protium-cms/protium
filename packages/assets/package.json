@@ -2,7 +2,7 @@
   "name": "@protium/assets",
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "license": "MIT",
   "engines": {
     "node": ">=10",
@@ -19,18 +19,6 @@
     "@babel/runtime": "^7.2.0",
     "@protium/app": "^0.0.1",
     "@protium/config": "^0.0.1",
-    "@types/express": "^4.16.0",
-    "@types/node": "^10.12.18",
-    "@types/react": "^16.7.18",
-    "@types/react-dom": "^16.0.11",
-    "@types/resolve-pkg": "^1.0.1",
-    "@types/styled-components": "^4.1.4",
-    "@types/webpack": "^4.4.22",
-    "@types/webpack-bundle-analyzer": "^2.13.0",
-    "@types/webpack-dev-middleware": "^2.0.2",
-    "@types/webpack-hot-middleware": "^2.16.4",
-    "@types/webpack-manifest-plugin": "^2.0.0",
-    "@types/webpack-node-externals": "^1.6.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-react-native-web": "^0.9.13",
     "babel-preset-minify": "^0.5.0",
@@ -53,12 +41,12 @@
     "webpack-node-externals": "^1.7.2",
     "webpack-pwa-manifest": "^4.0.0"
   },
+  "_moduleAliases": {
+    "react-native": "node_modules/react-native-web"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "build:web": "NODE_ENV=production webpack --config src/webpack.ts --mode production",
     "build:web:dev": "webpack --config src/webpack.ts --mode development"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.119"
   }
 }

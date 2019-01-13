@@ -4,7 +4,7 @@ import {Arguments, Argv} from 'yargs'
 
 const packagePath = resolvePkg('@protium/serve')
 const packageMeta = require('@protium/serve/package.json') // tslint:disable-line
-const devCmd: string[] = packageMeta.scripts.dev.split(' ')
+export const devCmd: string[] = packageMeta.scripts.dev.split(' ')
 
 export default {
   aliases: 'd',
