@@ -27,6 +27,7 @@
     "react-dom": "^16.7.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
+    "tsconfig": "^7.0.0",
     "tslint": "^5.12.0",
     "tslint-junit-formatter": "^5.1.0",
     "typescript": "^3.2.2",
@@ -44,6 +45,8 @@
     "react-native": "node_modules/react-native-web"
   },
   "scripts": {
+    "postinstall": "patch-package && lerna run generate-env-config --stream",
+    "generate-ts-config": "./scripts/generate-ts-config.ts",
     "protium": "packages/cli/bin/protium-dev.js",
     "protium:dist": "packages/cli/bin/protium.js",
     "clean": "rimraf \"report*.xml\" \"coverage\" \"packages/**/lib\" \"**/yarn-error.log\"",
@@ -65,7 +68,6 @@
     "test:ci": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci --coverage --reporters=default --reporters=jest-junit",
     "release": "echo 'disabled for now'",
     "run-env-config": "yarn --cwd packages/config run generate-env-config",
-    "postinstall": "patch-package && lerna run generate-env-config --stream",
     "typecheck": "lerna exec \"tsc --noEmit\" --parallel --ignore protium-simple-reference",
     "validate": "yarn clean && yarn lint && yarn typecheck && yarn test"
   },

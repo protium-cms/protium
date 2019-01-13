@@ -30,9 +30,9 @@ function configureProject(pkg) {
     testEnvironment: 'node',
     preset: 'ts-jest',
     setupTestFrameworkScriptFile: 'jest-mock-console/dist/setupTestFramework.js',
-    moduleNameMapper: pathsToModuleNameMapper(modulePaths, {
-      prefix: `<rootDir>/packages/`
-    }),
+    moduleNameMapper: {
+      "/^@protium\/(.*)$/": "packages/api/src/$1"
+    },
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),

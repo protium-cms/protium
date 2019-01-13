@@ -18,7 +18,6 @@ export default {
   command: 'dev',
   handler (args: Arguments<{}>) {
     const [cmd, ...cmdArgs] = devCmd
-    console.log(cmd, cmdArgs)
     spawnSync(cmd, cmdArgs, {
       cwd: packagePath,
       stdio: 'inherit',

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Jon Jaques <jaquers@gmail.com>",
   "license": "MIT",
-  "main": "lib/api/src/index.js",
+  "main": "lib/index.js",
   "source": "src/index.ts",
   "engines": {
     "node": ">=10",

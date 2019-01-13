@@ -1,64 +1,51 @@
 {
-  "exclude": [
-    "reference"
-  ],
+  "extends": "./tsconfig.settings.json",
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
-    "declaration": true,
-    "sourceMap": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "baseUrl": "packages",
     "paths": {
       "*": [
         "types/*"
       ],
-      "@protium/api": [
-        "api/src"
+      "@protium/api/*": [
+        "../api/lib"
       ],
-      "@protium/api/lib": [
-        "api/src/*"
+      "@protium/api": [
+        "../api/lib"
+      ],
+      "@protium/app/*": [
+        "../app/lib"
       ],
       "@protium/app": [
-        "app/src"
+        "../app/lib"
       ],
-      "@protium/app/lib": [
-        "app/src/*"
+      "@protium/assets/*": [
+        "../assets/lib"
       ],
       "@protium/assets": [
-        "assets/src"
+        "../assets/lib"
       ],
-      "@protium/assets/lib/*": [
-        "assets/src/*"
+      "@protium/cli/*": [
+        "../cli/lib"
       ],
       "@protium/cli": [
-        "cli/src"
+        "../cli/lib"
       ],
-      "@protium/cli/lib/*": [
-        "cli/src/*"
+      "@protium/config/*": [
+        "../config/lib"
       ],
       "@protium/config": [
-        "config/src"
+        "../config/lib"
       ],
-      "@protium/config/lib/*": [
-        "config/src/*"
+      "@protium/serve/*": [
+        "../serve/lib"
       ],
       "@protium/serve": [
-        "serve/src"
+        "../serve/lib"
       ],
-      "@protium/serve/lib/*": [
-        "serve/src/*"
+      "@protium/web/*": [
+        "../web/lib"
       ],
       "@protium/web": [
-        "web/src"
-      ],
-      "@protium/web/lib/*": [
-        "web/src/*"
+        "../web/lib"
       ]
     }
   }
