@@ -1,12 +1,6 @@
 {
-  "exclude": [
-    "**/lib",
-    "**/lib/**",
-    "reference",
-    "node_modules",
-  ],
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "esnext",
     "module": "commonjs",
     "jsx": "react",
     "declaration": true,
@@ -16,7 +10,6 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "baseUrl": "packages"
+    "skipLibCheck": true
   }
 }

@@ -373,3 +373,8 @@ secrets.yaml
 *local.yaml
 report*.xml
 .jest
+
+
+# Ignore sketch files
+*.sketch
+.cache-loader

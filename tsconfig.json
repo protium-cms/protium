@@ -1,52 +1,53 @@
 {
-  "extends": "./tsconfig.settings.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
       "*": [
         "types/*"
       ],
       "@protium/api": [
-        "../api/src"
+        "node_modules/@protium/api/src"
       ],
       "@protium/api/lib/*": [
-        "../api/src/*"
+        "node_modules/@protium/api/src/*"
       ],
       "@protium/app": [
-        "../app/src"
+        "node_modules/@protium/app/src"
       ],
       "@protium/app/lib/*": [
-        "../app/src/*"
+        "node_modules/@protium/app/src/*"
       ],
       "@protium/assets": [
-        "../assets/src"
+        "node_modules/@protium/assets/src"
       ],
       "@protium/assets/lib/*": [
-        "../assets/src/*"
+        "node_modules/@protium/assets/src/*"
       ],
       "@protium/cli": [
-        "../cli/src"
+        "node_modules/@protium/cli/src"
       ],
       "@protium/cli/lib/*": [
-        "../cli/src/*"
+        "node_modules/@protium/cli/src/*"
       ],
       "@protium/config": [
-        "../config/src"
+        "node_modules/@protium/config/src"
       ],
       "@protium/config/lib/*": [
-        "../config/src/*"
+        "node_modules/@protium/config/src/*"
       ],
       "@protium/serve": [
-        "../serve/src"
+        "node_modules/@protium/serve/src"
       ],
       "@protium/serve/lib/*": [
-        "../serve/src/*"
+        "node_modules/@protium/serve/src/*"
       ],
       "@protium/web": [
-        "../web/src"
+        "node_modules/@protium/web/src"
       ],
       "@protium/web/lib/*": [
-        "../web/src/*"
+        "node_modules/@protium/web/src/*"
       ]
     }
-  }
+  },
+  "extends": "./tsconfig.settings.json"
 }

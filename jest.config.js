@@ -3,6 +3,7 @@ const Path = require('path')
 const { defaults: tsJest } = require('ts-jest/presets')
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const { compilerOptions } = require('./tsconfig')
+const omit = require('lodash/omit')
 
 const projects = Fs.readdirSync(Path.resolve('packages'))
   .filter(p => !p.startsWith('.'))
@@ -30,9 +31,9 @@ function configureProject(pkg) {
     testEnvironment: 'node',
     preset: 'ts-jest',
     setupTestFrameworkScriptFile: 'jest-mock-console/dist/setupTestFramework.js',
-    moduleNameMapper: {
-      "/^@protium\/(.*)$/": "packages/api/src/$1"
-    },
+    moduleNameMapper: pathsToModuleNameMapper(omit(compilerOptions.paths, '*'), {
+      prefix: '<rootDir>/'
+    }),
     globals: {
       'ts-jest': {
         tsConfig: Path.resolve('packages', pkg, 'tsconfig.json'),

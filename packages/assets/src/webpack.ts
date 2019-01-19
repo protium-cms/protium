@@ -83,7 +83,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
       },
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
-    stats: 'errors-only',
+    // stats: 'errors-only',
   }
 
   if (target === ConfigTargets.Browser) {
@@ -182,9 +182,13 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   return {
     include: context,
     test: /\.(m?j|t)sx?$/,
-    use: {
-      loader: 'babel-loader',
-      options: babelConfig,
-    },
+    use: [
+      'cache-loader',
+      'thread-loader',
+      {
+        loader: 'babel-loader',
+        options: babelConfig,
+      },
+    ],
   }
 }
