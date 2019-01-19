@@ -38,7 +38,7 @@ COPY packages ./packages
 
 # install dependencies and compile to js
 RUN yarn global add lerna
-RUN yarn bootstrap:ci
+RUN yarn ci:bootstrap
 RUN yarn build
 
 # reset modules to only prod dependencies
