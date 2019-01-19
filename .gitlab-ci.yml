@@ -32,7 +32,7 @@ stages:
 "Install Dependencies":
   stage: setup
   script:
-    - yarn bootstrap:ci
+    - yarn ci:bootstrap
 
 "Audit Dependencies":
   allow_failure: true
@@ -44,7 +44,7 @@ stages:
   allow_failure: true
   stage: test
   script:
-    - yarn lint:ci
+    - yarn ci:lint
   artifacts:
     reports:
       junit: report-lint.xml
@@ -52,8 +52,7 @@ stages:
 "Unit Tests":
   stage: test
   script:
-    # - yarn build
-    - yarn test:ci
+    - yarn ci:test
   artifacts:
     reports:
       junit: report-unit-tests.xml
