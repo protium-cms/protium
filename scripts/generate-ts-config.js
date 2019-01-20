@@ -1,12 +1,11 @@
-#!/usr/bin/env ts-node
-import Fs from 'fs'
-import Path from 'path'
-import {LoadResult, loadSync} from 'tsconfig'
+#!/usr/bin/env node
+const Fs = require('fs')
+const Path = require('path')
 
 const projectRoot = Path.resolve('.')
 const packagesPath = Path.resolve('packages')
 
-const config: any = {
+const config = {
   compilerOptions: {
     baseUrl: './',
     paths: {
@@ -39,8 +38,3 @@ Fs.writeFileSync(
   Path.join(projectRoot, 'tsconfig.json'),
   JSON.stringify(config, null, 2),
 )
-
-// const relatedDeps = Object.keys(pkg.dependencies)
-//   .filter((dep) => packages.some((p: string) => p === `@protium/${p}`))
-//   .map((dep) => dep.replace('@protium/', ''))
-//   .map((dep) => Path.join('../', name, 'src'))

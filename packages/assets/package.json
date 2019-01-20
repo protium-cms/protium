@@ -47,8 +47,12 @@
     "react-native": "node_modules/react-native-web"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "run-p \"build:ts\" \"build:web\"",
+    "build:ts": "tsc -p tsconfig.build.json",
     "build:web": "NODE_ENV=production webpack --config src/webpack.ts --mode production",
     "build:web:dev": "webpack --config src/webpack.ts --mode development"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

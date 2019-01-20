@@ -1,0 +1,16 @@
+patch-package
+--- a/node_modules/nyan-progress/dist/index.js
++++ b/node_modules/nyan-progress/dist/index.js
+@@ -141,9 +141,9 @@ function nyanProgress() {
+       var message = isFinished ? this.message.finished : this.message.error;
+       var paint = this.draw(cat, message);
+ 
+-      if (isFinished) {
+-        paint[paint.length - 1] += ' in ' + timeElappsed + 's.\n';
+-      }
++      // if (isFinished) {
++      //   paint[paint.length - 1] += ' in ' + timeElappsed + 's.\n';
++      // }
+ 
+       stream.write(paint.join('\n') + '\n');
+       stream.close();
