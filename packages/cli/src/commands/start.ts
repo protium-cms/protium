@@ -5,7 +5,7 @@ import {Arguments, Argv} from 'yargs'
 
 const packagePath = resolvePkg('@protium/serve')
 const packageMeta = require('@protium/serve/package.json') // tslint:disable-line
-console.log(packagePath)
+
 export default {
   aliases: 's',
   builder: (yargs: Argv<{}>) => yargs

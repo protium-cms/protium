@@ -1,4 +1,4 @@
-import config from '@protium/config'
+import {config} from '@protium/core'
 import Knex from 'knex'
 
 export default Knex({

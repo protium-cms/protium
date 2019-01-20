@@ -1,7 +1,7 @@
 import Chalk from 'chalk'
 import Yargs from 'yargs'
 
-import {command as debug} from './commands/debug'
+import debug from './commands/debug'
 import dev from './commands/dev'
 import start from './commands/start'
 

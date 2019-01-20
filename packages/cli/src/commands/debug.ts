@@ -11,7 +11,7 @@ interface IDebugCommand {
   inspectBrk: string
 }
 
-export const command: CommandModule<any, any> = {
+export default {
   aliases: 'd',
   builder: (yargs: Argv<any>) => yargs
     .usage('Usage: $0 debug <app>')
@@ -24,7 +24,6 @@ export const command: CommandModule<any, any> = {
   handler (args: Arguments<any>) {
     const [cmd, ...cmdArgs] = devCmd
     const entry = cmdArgs.pop() as string
-    const tsnd = Path.resolve('node_modules', '.bin', 'tsnd')
 
     if (args.inspect) {
       cmdArgs.push('--inspect')
@@ -38,9 +37,9 @@ export const command: CommandModule<any, any> = {
 
     const nodeOpts: ForkOptions = {
       cwd: packagePath,
-      stdio: [0, 1, 2, 'ipc'],
+      stdio: 'inherit',
     }
 
-    fork(tsnd, cmdArgs, nodeOpts)
+    fork(cmd, cmdArgs, nodeOpts)
   },
 }

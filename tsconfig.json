@@ -29,11 +29,11 @@
       "@protium/cli/lib/*": [
         "node_modules/@protium/cli/src/*"
       ],
-      "@protium/config": [
-        "node_modules/@protium/config/src"
+      "@protium/core": [
+        "node_modules/@protium/core/src"
       ],
-      "@protium/config/lib/*": [
-        "node_modules/@protium/config/src/*"
+      "@protium/core/lib/*": [
+        "node_modules/@protium/core/src/*"
       ],
       "@protium/serve": [
         "node_modules/@protium/serve/src"

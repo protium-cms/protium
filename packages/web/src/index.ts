@@ -1,4 +1,5 @@
 import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/middleware'
+import {config} from '@protium/core'
 import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
@@ -6,6 +7,7 @@ import helmet from 'helmet'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import favicon from 'serve-favicon'
+import errorHandler from './middleware/error-handler'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
 // const APP_MODULE = '@protium/app'
@@ -19,11 +21,15 @@ app.use(helmet())
 app.use(compression())
 app.use(json({strict: true}))
 
-if (DEVELOPMENT) {
+app.use((req, res, next) => {
+  Math.random() > 0.5 ? next(new Error('random error')) : next()
+})
+
+if (config.get('env') === 'development') {
   app.use(createDevMiddleware())
 }
 
-app.use(favicon(Path.join(assetModule, 'assets', 'favicon.ico')))
+app.use(favicon(Path.join(assetModule, 'images', 'icon_29pt.png')))
 
 app.get('/robots.txt', (req, res) => res.send(`
   User-agent: *
@@ -41,3 +47,6 @@ app.use('/assets', Express.static(
 ))
 
 app.use('/*', createSSRMiddleware())
+app.use(errorHandler)
+
+export default app

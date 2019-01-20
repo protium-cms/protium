@@ -1,4 +1,4 @@
-import config from './index'
+import config from './config'
 
 describe('config', () => {
   it('should export a config object', () => {

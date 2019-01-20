@@ -3,11 +3,12 @@ import compression from 'compression'
 import Express from 'express'
 import db from './db'
 
-export const api = Express()
+export const app = Express()
+export default app
 
-api.use(compression())
-api.use(bodyParser.json({strict: true}))
+app.use(compression())
+app.use(bodyParser.json({strict: true}))
 
-api.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.json({hello: 'world'})
 })

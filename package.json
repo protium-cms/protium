@@ -74,7 +74,7 @@
     "dev": "yarn protium dev",
     "dev:test": "yarn test --watch",
     "generate:env:config": "yarn workspace @protium/config generate-env-config",
-    "generate:ts:config": "./scripts/generate-ts-config.ts",
+    "generate:ts:config": "./scripts/generate-ts-config",
     "git:push": "yarn validate && git push --no-verify && git push github --no-verify",
     "lint": "tslint -c tslint.json '**/*.{ts,tsx}'",
     "lint:fix": "yarn lint --fix",
@@ -87,8 +87,7 @@
     "protium:dist": "packages/cli/bin/protium.js",
     "postinstall": "patch-package",
     "start": "yarn protium:dist start",
-    "typecheck": "lerna run build --parallel --ignore protium-simple-reference -- --noEmit",
-    "validate": "yarn clean && yarn lint && yarn typecheck && yarn test"
+    "validate": "yarn clean && yarn lint && yarn build && yarn test"
   },
   "workspaces": {
     "packages": [

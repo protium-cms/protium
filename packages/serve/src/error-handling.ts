@@ -1,13 +1,18 @@
+import {logger} from '@protium/core'
+
 process
+  .on('uncaughtException', (err) => {
+    logger.warn('Unhandled exception detected: exiting to prevent bad state...')
+    logger.error(err)
+    process.nextTick(() => process.exit(1))
+  })
   .on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled promise rejection detected:')
-    console.error(reason)
-    console.error('Exiting to prevent bad state...')
+    logger.warn('Unhandled promise rejection detected: exiting to prevent bad state...')
+    logger.error(reason)
     process.nextTick(() => process.exit(1))
   })
   .on('multipleResolves', (type, promise, reason) => {
-    console.error('Multiple promise resolutions detected:')
-    console.error(`  ${type}(${JSON.stringify(reason)})`)
-    console.error('Exiting to prevent bad state...')
+    logger.warn('Multiple promise resolutions detected: exiting to prevent bad state...')
+    logger.error(`${type}(${JSON.stringify(reason)})`)
     process.nextTick(() => process.exit(1))
   })
