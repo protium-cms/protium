@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from 'express'
+import moduleAlias from 'module-alias'
 import Path from 'path'
 import React from 'react'
 import {renderToStaticNodeStream} from 'react-dom/server'
@@ -8,6 +9,7 @@ import Webpack, {Configuration} from 'webpack'
 import WebpackDevMiddleware from 'webpack-dev-middleware'
 import WebpackHotMiddleware from 'webpack-hot-middleware'
 import Html from './components/Html'
+import logger from './logger'
 import assetConfig from './webpack'
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development'
@@ -90,13 +92,21 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
     const manifest = require(manifestPath)
     const serverEntry = manifest[opts.serverBundleName + '.js']
 
+    // We alias react-native -> react-native-web here
+    // So SSR renderer will call that instead
+    logger.info('add alias')
+    moduleAlias.addAlias('react-native', (fromPath: any, request: any, alias: any) => {
+      logger.info('fromPath %s', fromPath)
+      return 'react-native-web'
+    })
+
     if (!serverEntry) {
       throw new Error(`Unable to determine server entrypoint: ${serverEntry}`)
     }
 
     res.locals.appEntrypoint = Path.join(moduleDirectory, serverEntry)
     if (DEVELOPMENT) {
-      console.log(`[assets]: clear ${res.locals.appEntrypoint}`)
+      logger.debug(`removing ${Path.relative(process.cwd(), res.locals.appEntrypoint)} from cache...`)
       delete require.cache[res.locals.appEntrypoint]
     }
 

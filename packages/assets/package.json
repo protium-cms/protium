@@ -43,9 +43,6 @@
     "webpack-node-externals": "^1.7.2",
     "webpack-pwa-manifest": "^4.0.0"
   },
-  "_moduleAliases": {
-    "react-native": "node_modules/react-native-web"
-  },
   "scripts": {
     "build": "run-p \"build:ts\" \"build:web\"",
     "build:ts": "tsc -p tsconfig.build.json",

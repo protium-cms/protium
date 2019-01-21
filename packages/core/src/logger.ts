@@ -1,13 +1,16 @@
+import chalk from 'chalk'
 import {format} from 'logform'
 import Winston from 'winston'
+import config from './config'
 import error from './error-renderer'
-const {combine, printf, colorize} = format
+
+const {combine, printf, colorize, label} = format
 const {Console} = Winston.transports
 
 const consoleTransport = new Console()
 const colorFormatter = colorize({
   colors: {
-    debug: 'green',
+    debug: 'magenta',
     error: 'red',
     info: 'blue',
     log: 'white',
@@ -29,20 +32,27 @@ const errors = format((info) => {
 })
 
 const simpleFormatter = printf((info) => {
-  const msg = `${info.level}: ${info.message}`
+  const label = info.label && info.label.length
+    ? chalk.dim(`[${info.label}]`)
+    : ''
+  const msg = `${info.level}: ${label} ${info.message}`
   return msg
 })
 
-const logger = Winston.createLogger({
-  format: combine(
-    errors(),
-    colorFormatter,
-    simpleFormatter,
-  ),
-  level: 'info',
-  transports: [
-    consoleTransport,
-  ],
-})
+export function createLogger (type: string = '') {
+  return Winston.createLogger({
+    format: combine(
+      errors(),
+      colorFormatter,
+      label({label: type}),
+      simpleFormatter,
+    ),
+    level: config.get('logLevel'),
+    transports: [
+      consoleTransport,
+    ],
+  })
+}
 
+export const logger = createLogger()
 export default logger

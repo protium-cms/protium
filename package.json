@@ -32,6 +32,7 @@
     "chalk": "^2.4.2",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "eslint": "^5.12.1",
     "jest": "^23.6.0",
     "jest-junit": "^6.0.1",
     "jest-mock-console": "^0.4.2",
@@ -55,9 +56,6 @@
   "resolutions": {
     "lodash": "4.17.11",
     "react-devtools-core": "3.6.0"
-  },
-  "_moduleAliases": {
-    "react-native": "node_modules/react-native-web"
   },
   "scripts": {
     "bootstrap": "yarn && lerna bootstrap --ignore-scripts",

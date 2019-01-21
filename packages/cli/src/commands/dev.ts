@@ -1,3 +1,4 @@
+import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import {Arguments, Argv} from 'yargs'
 const tsNodeDev = require('ts-node-dev') // tslint:disable-line
@@ -26,7 +27,7 @@ const compat = [
 }, [] as string[])
 
 export function devServer (extra: string[] = []) {
-  process.chdir(resolvePkg('@protium/serve'))
+  const script = Path.join(resolvePkg('@protium/serve'), 'src/index.ts')
 
   const scriptArgs = [
     '--prefer-ts',
@@ -38,7 +39,7 @@ export function devServer (extra: string[] = []) {
     ...extra,
   ]
 
-  return tsNodeDev('src/index.ts', scriptArgs, nodeArgs, {
+  return tsNodeDev(script, scriptArgs, nodeArgs, {
     dedupe: true,
     fork: false,
     ignore: [

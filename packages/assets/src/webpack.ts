@@ -112,7 +112,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         new ForkTsCheckerWebpackPlugin({
           async: true,
           tsconfig: Path.join(appContext, 'tsconfig.build.json'),
-          tslint: Path.resolve('../../tslint.json'),
+          // tslint: Path.join('../../tslint.json'),
           workers: ForkTsCheckerWebpackPlugin.ONE_CPU,
         }),
       )
@@ -123,7 +123,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
     c.target = 'node'
     c.externals = [nodeExternals({
       modulesDir: '../../node_modules',
-      // whitelist: /react-native(?:-web)/,
+      // whitelist: /react-native(?:-web)|style-components\/native/,
     })]
     c.output!.libraryTarget = 'commonjs2'
     c.optimization = {minimize: false}
@@ -182,7 +182,8 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   return {
     include: [
       context,
-      /node_modules\/react-native-web/,
+      // /node_modules\/react-native-web/,
+      // /node_modules\/styled-components/,
     ],
     test: /\.(m?j|t)sx?$/,
     use: [

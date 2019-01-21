@@ -1,4 +1,5 @@
 env: development
+logLevel: debug
 
 db:
   client: 'sqlite3'

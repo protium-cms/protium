@@ -25,9 +25,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json"
   },
-  "_moduleAliases": {
-    "react-native": "node_modules/react-native-web"
-  },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.119",

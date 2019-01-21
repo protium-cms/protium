@@ -17,20 +17,20 @@ start('api')
 export function start (type: string) {
   const env = config.get('env')
   const port = config.get(`${type}.port`)
-  const mod = require(`@protium/${type}`).default as Application
+  const {default: app, logger} = require(`@protium/${type}`)
 
   const options: ServerOptions = {
-    cert: getCertType('app', 'crt'),
-    key: getCertType('app', 'key'),
+    cert: getCertType('app', 'crt', logger),
+    key: getCertType('app', 'key', logger),
   }
 
-  const server = Spdy.createServer(options, mod)
+  const server = Spdy.createServer(options, app)
   server.listen(port, () => {
-    logger.info(`[${type}]: listening on port ${port} in ${env} mode`)
+    logger.info(`listening on port ${port} in ${env} mode`)
   })
 }
 
-function getCertType (target: string, type: 'key' | 'crt' | 'pem'): string | undefined {
+function getCertType (target: string, type: 'key' | 'crt' | 'pem', log: typeof logger): string | undefined {
   const envKey = `${target.toUpperCase()}_${type.toUpperCase()}`
   const envValue = process.env[envKey]
 
@@ -38,11 +38,11 @@ function getCertType (target: string, type: 'key' | 'crt' | 'pem'): string | und
     return envValue
   }
 
-  logger.silly(`${envKey} not found, looking for .pem file...`)
+  log.debug(`${envKey} not found, looking for .pem file...`)
   const keyName = `${target}.${type === 'key' ? `private.${type}` : type}.pem`
   const keyPath = Path.resolve(packageRoot, 'keys', keyName)
   if (Fs.existsSync(keyPath)) {
-    logger.silly(`Found ${keyName}, using file.`)
+    log.debug(`Found ${keyName}, using file.`)
     return Fs.readFileSync(keyPath, 'utf8')
   }
 }

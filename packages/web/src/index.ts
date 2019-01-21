@@ -1,5 +1,5 @@
 import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/middleware'
-import {config} from '@protium/core'
+import {config, createLogger} from '@protium/core'
 import {json} from 'body-parser'
 import compression from 'compression'
 import Express from 'express'
@@ -16,6 +16,7 @@ const ASSET_MODULE = '@protium/assets'
 
 const assetModule = resolvePkg(ASSET_MODULE)
 export const app = Express()
+export const logger = createLogger('web')
 
 app.use(helmet())
 app.use(compression())
