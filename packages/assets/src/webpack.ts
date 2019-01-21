@@ -123,6 +123,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
     c.target = 'node'
     c.externals = [nodeExternals({
       modulesDir: '../../node_modules',
+      whitelist: /react-native(?:-web)/,
     })]
     c.output!.libraryTarget = 'commonjs2'
     c.optimization = {minimize: false}
@@ -180,7 +181,10 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   }
 
   return {
-    include: context,
+    include: [
+      context,
+      /node_modules\/react-native-web/,
+    ],
     test: /\.(m?j|t)sx?$/,
     use: [
       'cache-loader',
