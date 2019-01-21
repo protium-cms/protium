@@ -1,38 +1,6 @@
-import {fork, spawn, spawnSync} from 'child_process'
-import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import {Arguments, Argv} from 'yargs'
-
-const packagePath = resolvePkg('@protium/serve')
-const tsNodeDev = resolvePkg('ts-node-dev')
-const modPath = Path.join(tsNodeDev, 'bin', 'ts-node-dev')
-
-const compat = [
-  'module-alias/register',
-  'tsconfig-paths/register',
-].reduce((m, mod) => {
-  m.push('-r', mod)
-  return m
-}, [] as string[])
-
-const ignore = [
-  'server.bundle.js',
-  'manifest.json',
-].reduce((m, file) => {
-  m.push('--ignore-watch', file)
-  return m
-}, [] as string[])
-
-export const devCmd = [
-  modPath,
-  ...compat,
-  ...ignore,
-  '--no-notify',
-  '--dedupe',
-  '--prefer-ts',
-  '--pretty',
-  'src/index.ts',
-]
+const tsNodeDev = require('ts-node-dev') // tslint:disable-line
 
 export default {
   aliases: 'd',
@@ -45,11 +13,38 @@ export default {
   ,
   command: 'dev',
   handler (args: Arguments<{}>) {
-    const [cmd, ...cmdArgs] = devCmd
-    return fork(cmd, cmdArgs, {
-      cwd: packagePath,
-      // detached: true,
-      stdio: 'inherit',
-    })
+    devServer()
   },
+}
+
+const compat = [
+  'module-alias/register',
+  'tsconfig-paths/register',
+].reduce((m, mod) => {
+  m.push('-r', mod)
+  return m
+}, [] as string[])
+
+export function devServer (extra: string[] = []) {
+  process.chdir(resolvePkg('@protium/serve'))
+
+  const scriptArgs = [
+    '--prefer-ts',
+    '--pretty',
+  ]
+
+  const nodeArgs = [
+    ...compat,
+    ...extra,
+  ]
+
+  return tsNodeDev('src/index.ts', scriptArgs, nodeArgs, {
+    dedupe: true,
+    fork: false,
+    ignore: [
+      'server.bundle.js',
+      'manifest.json',
+    ],
+    notify: false,
+  })
 }
