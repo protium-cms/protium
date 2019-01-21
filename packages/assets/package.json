@@ -25,6 +25,7 @@
     "cache-loader": "^2.0.1",
     "fork-ts-checker-webpack-plugin": "^0.5.2",
     "lodash": "^4.17.11",
+    "offline-plugin": "^5.0.6",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-hot-loader": "^4.6.3",

@@ -1,3 +1,5 @@
+require('offline-plugin/runtime').install() // tslint:disable-line
+
 import {AppRegistry} from 'react-native'
 import {App} from './index'
 

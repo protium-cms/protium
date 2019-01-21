@@ -1,5 +1,6 @@
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import Fs from 'fs'
+import OfflinePlugin from 'offline-plugin'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import Webpack from 'webpack'
@@ -95,9 +96,20 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         crossorigin: 'use-credentials',
         description: 'My progressive universal app',
         fingerprints: false,
+        icons: [
+          {
+            sizes: [32, 64, 128, 256, 512],
+            src: Path.join(assetContext, 'images', 'Icon.png'),
+          },
+        ],
         name: 'Protium',
         short_name: 'protium',
+        start_url: '/',
         theme_color: '#ccc',
+      }),
+      new OfflinePlugin({
+        autoUpdate: true,
+        publicPath: '/assets/',
       }),
     )
 
@@ -120,9 +132,12 @@ function config (target: ConfigTargets): IAppWebpackConfig {
   }
 
   if (target === ConfigTargets.Server) {
+    const modulesDir = Fs.existsSync(Path.resolve('node_modules', 'react'))
+      ? Path.resolve('node_modules')
+      : Path.resolve('../../node_modules')
     c.target = 'node'
     c.externals = [nodeExternals({
-      modulesDir: Path.resolve('node_modules'),
+      modulesDir,
       // whitelist: /react-native(?:-web)|style-components\/native/,
     })]
     c.output!.libraryTarget = 'commonjs2'
