@@ -32,10 +32,10 @@ const errors = format((info) => {
 })
 
 const simpleFormatter = printf((info) => {
-  const label = info.label && info.label.length
+  const logLabel = info.label && info.label.length
     ? chalk.dim(`[${info.label}]`)
     : ''
-  const msg = `${info.level}: ${label} ${info.message}`
+  const msg = `${info.level}: ${logLabel} ${info.message}`
   return msg
 })
 

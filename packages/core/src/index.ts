@@ -1,9 +1,9 @@
 
 export {
-  default as config
+  default as config,
 } from './config'
 
 export {
   default as logger,
-  createLogger
+  createLogger,
 } from './logger'

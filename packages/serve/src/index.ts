@@ -2,7 +2,7 @@ process.title = 'protium-server'
 
 import './error-handling'
 
-import {config, logger} from '@protium/core'
+import {config} from '@protium/core'
 import {Application} from 'express'
 import Fs from 'fs'
 import Path from 'path'
