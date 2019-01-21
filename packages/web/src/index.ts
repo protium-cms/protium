@@ -21,10 +21,6 @@ app.use(helmet())
 app.use(compression())
 app.use(json({strict: true}))
 
-app.use((req, res, next) => {
-  Math.random() > 0.5 ? next(new Error('random error')) : next()
-})
-
 if (config.get('env') === 'development') {
   app.use(createDevMiddleware())
 }
