@@ -122,7 +122,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
   if (target === ConfigTargets.Server) {
     c.target = 'node'
     c.externals = [nodeExternals({
-      modulesDir: '../../node_modules',
+      modulesDir: Path.resolve('node_modules'),
       // whitelist: /react-native(?:-web)|style-components\/native/,
     })]
     c.output!.libraryTarget = 'commonjs2'

@@ -94,11 +94,8 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
 
     // We alias react-native -> react-native-web here
     // So SSR renderer will call that instead
-    logger.info('add alias')
-    moduleAlias.addAlias('react-native', (fromPath: any, request: any, alias: any) => {
-      logger.info('fromPath %s', fromPath)
-      return 'react-native-web'
-    })
+    // This will probably break once we start using real code...
+    moduleAlias.addAlias('react-native', 'react-native-web')
 
     if (!serverEntry) {
       throw new Error(`Unable to determine server entrypoint: ${serverEntry}`)

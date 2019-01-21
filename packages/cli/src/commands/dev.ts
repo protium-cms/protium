@@ -41,6 +41,7 @@ export function devServer (extra: string[] = []) {
 
   return tsNodeDev(script, scriptArgs, nodeArgs, {
     dedupe: true,
+    deps: 0,
     fork: false,
     ignore: [
       'server.bundle.js',
