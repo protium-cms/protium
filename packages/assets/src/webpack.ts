@@ -123,7 +123,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
     c.target = 'node'
     c.externals = [nodeExternals({
       modulesDir: '../../node_modules',
-      whitelist: /react-native(?:-web)/,
+      // whitelist: /react-native(?:-web)/,
     })]
     c.output!.libraryTarget = 'commonjs2'
     c.optimization = {minimize: false}
@@ -173,7 +173,6 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   }
 
   if (target === ConfigTargets.Browser) {
-    // babelConfig.presets.push('babel-preset-minify')
     babelConfig.plugins.unshift('babel-plugin-react-native-web')
     if (!PRODUCTION) {
       babelConfig.plugins.push('react-hot-loader/babel')
@@ -187,8 +186,6 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
     ],
     test: /\.(m?j|t)sx?$/,
     use: [
-      'cache-loader',
-      'thread-loader',
       {
         loader: 'babel-loader',
         options: babelConfig,

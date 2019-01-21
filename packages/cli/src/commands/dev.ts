@@ -28,7 +28,7 @@ export const devCmd = [
   ...compat,
   ...ignore,
   '--no-notify',
-  // '--dedupe',
+  '--dedupe',
   '--prefer-ts',
   '--pretty',
   'src/index.ts',

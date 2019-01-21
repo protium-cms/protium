@@ -1,3 +1,5 @@
+process.title = 'protium-server'
+
 import './error-handling'
 
 import {config, logger} from '@protium/core'
