@@ -27,6 +27,7 @@ export default function Html (props: IHtmlProps) {
     <head>
       <title>Protium</title>
       <meta charSet='utf8' />
+      <meta name='theme-color' content='#ccc' />
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <meta name='description' content='A universal app for awesomeness' />
       <link rel='manifest' href='/assets/manifest.json' />

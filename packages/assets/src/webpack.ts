@@ -108,8 +108,16 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         theme_color: '#ccc',
       }),
       new OfflinePlugin({
+        ServiceWorker: {
+          scope: '/',
+        },
+        appShell: '/',
         autoUpdate: true,
-        publicPath: '/assets/',
+        externals: [
+          '/',
+          '/favicon.ico',
+          '/sw.js',
+        ],
       }),
     )
 

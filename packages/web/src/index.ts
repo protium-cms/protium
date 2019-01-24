@@ -26,7 +26,9 @@ if (config.get('env') === 'development') {
   app.use(createDevMiddleware())
 }
 
-app.use(favicon(Path.join(assetModule, 'images', 'icon_29pt.png')))
+app.use(favicon(Path.join(assetModule, 'lib', 'icon_64x64.png')))
+
+app.get('/sw.js', (req, res) => res.sendFile(Path.join(assetModule, 'lib', 'sw.js')))
 
 app.get('/robots.txt', (req, res) => res.send(`
   User-agent: *
