@@ -107,26 +107,30 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         start_url: '/',
         theme_color: '#ccc',
       }),
-      new OfflinePlugin({
-        ServiceWorker: {
-          scope: '/',
-        },
-        appShell: '/',
-        autoUpdate: true,
-        externals: [
-          '/',
-          '/favicon.ico',
-          '/sw.js',
-        ],
-      }),
     )
 
     if (PRODUCTION) {
-      c.plugins!.push(new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        generateStatsFile: true,
-        openAnalyzer: false,
-      }))
+      c.plugins!.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          generateStatsFile: true,
+          openAnalyzer: false,
+        }),
+        new OfflinePlugin({
+          ServiceWorker: {
+            publicPath: '/sw.js',
+            scope: '/',
+          },
+          appShell: '/',
+          autoUpdate: true,
+          externals: [
+            '/',
+            '/favicon.ico',
+            '/sw.js',
+          ],
+          publicPath: '/assets/',
+        }),
+      )
     } else {
       c.plugins!.unshift(
         new ForkTsCheckerWebpackPlugin({

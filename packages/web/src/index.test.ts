@@ -1,3 +1,5 @@
+jest.mock('serve-favicon')
+
 import {app} from '.'
 
 describe('web', () => {
