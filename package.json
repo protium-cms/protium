@@ -42,6 +42,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "rimraf": "^2.6.2",
+    "sloc": "^0.2.1",
     "ts-jest": "^23.10.5",
     "tsconfig": "^7.0.0",
     "tslint": "^5.12.0",
@@ -87,6 +88,8 @@
     "protium": "packages/cli/bin/protium-dev.js",
     "protium:dist": "packages/cli/bin/protium.js",
     "postinstall": "patch-package",
+    "sloc": "sloc --exclude node_modules .",
+    "sloc:app": "sloc --exclude node_modules packages",
     "start": "yarn protium:dist start",
     "validate": "yarn clean && yarn lint && yarn test && yarn build"
   },
