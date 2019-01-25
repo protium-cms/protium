@@ -88,7 +88,7 @@
     "protium:dist": "packages/cli/bin/protium.js",
     "postinstall": "patch-package",
     "start": "yarn protium:dist start",
-    "validate": "yarn clean && yarn lint && yarn build && yarn test"
+    "validate": "yarn clean && yarn lint && yarn test && yarn build"
   },
   "workspaces": {
     "packages": [
