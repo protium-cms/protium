@@ -1,4 +1,6 @@
-require('offline-plugin/runtime').install() // tslint:disable-line
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install() // tslint:disable-line
+}
 
 import {AppRegistry} from 'react-native'
 import {App} from './index'

@@ -128,7 +128,12 @@ function config (target: ConfigTargets): IAppWebpackConfig {
             '/favicon.ico',
             '/sw.js',
           ],
+          prefetchRequest: {
+            credentials: 'include',
+            mode: 'same-origin',
+          },
           publicPath: '/assets/',
+          relativePaths: false,
         }),
       )
     } else {

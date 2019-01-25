@@ -9,7 +9,7 @@ import resolvePkg from 'resolve-pkg'
 import favicon from 'serve-favicon'
 import errorHandler from './middleware/error-handler'
 
-const DEVELOPMENT = process.env.NODE_ENV === 'development'
+const DEVELOPMENT = config.get('env') === 'development'
 // const APP_MODULE = '@protium/app'
 const ASSET_MODULE = '@protium/assets'
 // const WEB_MODULE = '@protium/web'
@@ -26,7 +26,11 @@ if (config.get('env') === 'development') {
   app.use(createDevMiddleware())
 }
 
-app.use(favicon(Path.join(assetModule, 'lib', 'icon_64x64.png')))
+const favIconPath = DEVELOPMENT
+  ? Path.join(assetModule, 'images', 'icon_29pt.png')
+  : Path.join(assetModule, 'lib', 'icon_64x64.png')
+
+app.use(favicon(favIconPath))
 
 app.get('/sw.js', (req, res) => res.sendFile(Path.join(assetModule, 'lib', 'sw.js')))
 
