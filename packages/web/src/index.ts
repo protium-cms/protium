@@ -2,12 +2,14 @@ import {createDevMiddleware, createSSRMiddleware} from '@protium/assets/lib/midd
 import {config, createLogger} from '@protium/core'
 import {json} from 'body-parser'
 import compression from 'compression'
-import Express from 'express'
+import Express, {Request, Response} from 'express'
 import helmet from 'helmet'
 import Path from 'path'
 import resolvePkg from 'resolve-pkg'
 import favicon from 'serve-favicon'
 import errorHandler from './middleware/error-handler'
+
+const responseTime = require('response-time') // tslint:disable-line
 
 const DEVELOPMENT = config.get('env') === 'development'
 // const APP_MODULE = '@protium/app'
@@ -17,6 +19,9 @@ const ASSET_MODULE = '@protium/assets'
 const assetModule = resolvePkg(ASSET_MODULE)
 export const app = Express()
 export const logger = createLogger('web')
+app.use(responseTime((req: Request, res: Response, time: number) => {
+  logger.debug(`${req.method.toUpperCase()} ${req.originalUrl} - ${time.toFixed(2)} ms`)
+}))
 
 app.use(helmet())
 app.use(compression())
