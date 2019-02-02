@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 import {AppRegistry} from 'react-native'
-import {App} from './index'
+import {App} from './App'
 
 AppRegistry.registerComponent('App', () => App)
 AppRegistry.runApplication('App', {

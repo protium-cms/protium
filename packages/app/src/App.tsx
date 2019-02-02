@@ -1,12 +1,12 @@
 import React from 'react'
-import {hot} from 'react-hot-loader/root'
+// import {hot} from 'react-hot-loader/root'
 import {View} from 'react-native'
 import styled from 'styled-components/native'
 import Logo from './components/Logo'
 
 const Container = styled(View)`
   align-items: center;
-  background-color: #ccc;
+  background-color: #bada55;
   height: 100%;
   justify-content: center;
   margin: 0;
@@ -14,9 +14,8 @@ const Container = styled(View)`
   width: 100%;
 `
 
-export const App = hot(Application)
-
-function Application () {
+export function App () {
+  // throw new Error('777')
   return <Container>
     <Logo />
   </Container>

@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express'
 import moduleAlias from 'module-alias'
 import Path from 'path'
 import React from 'react'
-import {renderToStaticNodeStream} from 'react-dom/server'
+import {renderToStaticMarkup, renderToStaticNodeStream} from 'react-dom/server'
 import {AppRegistry} from 'react-native-web'
 import resolvePkg from 'resolve-pkg'
 import Webpack, {Configuration} from 'webpack'
@@ -97,41 +97,50 @@ export function createSSRMiddleware (options: IWebpackMiddlewareOptions = defaul
     // This will probably break once we start using real code...
     moduleAlias.addAlias('react-native', 'react-native-web')
 
-    if (!serverEntry) {
-      throw new Error(`Unable to determine server entrypoint: ${serverEntry}`)
+    try {
+      if (!serverEntry) {
+        throw new Error(`Unable to determine server entrypoint: ${serverEntry}`)
+      }
+
+      res.locals.appEntrypoint = Path.join(moduleDirectory, serverEntry)
+      if (DEVELOPMENT) {
+        logger.debug(`removing ${Path.relative(process.cwd(), res.locals.appEntrypoint)} from cache...`)
+        delete require.cache[res.locals.appEntrypoint]
+      }
+
+      const mod = require(res.locals.appEntrypoint)
+      if (!mod) {
+        throw new Error(`Unable to require server entrypoint: ${mod}`)
+      }
+
+      const app = mod[opts.moduleExport || 'default']
+      if (!app) {
+        throw new Error(`Unable to find app`)
+      }
+
+      res.locals.app = app
+      res.locals.appName = 'App'
+      AppRegistry.registerComponent(res.locals.appName, () => app)
+
+      next()
+    } catch (err) {
+      logger.error('error registering component...')
+      next(err)
     }
-
-    res.locals.appEntrypoint = Path.join(moduleDirectory, serverEntry)
-    if (DEVELOPMENT) {
-      logger.debug(`removing ${Path.relative(process.cwd(), res.locals.appEntrypoint)} from cache...`)
-      delete require.cache[res.locals.appEntrypoint]
-    }
-
-    const mod = require(res.locals.appEntrypoint)
-    if (!mod) {
-      throw new Error(`Unable to require server entrypoint: ${mod}`)
-    }
-
-    const app = mod[opts.moduleExport || 'default']
-    if (!app) {
-      throw new Error(`Unable to find app`)
-    }
-
-    res.locals.app = app
-    res.locals.appName = 'App'
-    AppRegistry.registerComponent(res.locals.appName, () => app)
-
-    next()
   }
 
   function renderMiddleware (req: Request, res: Response, next: NextFunction) {
-    const appName: string = res.locals.appName
-    const appInstance = React.createElement(Html, {appName})
-    const appStream = renderToStaticNodeStream(appInstance)
-    res.status(200)
-    res.type('html')
-    res.write(`<!doctype html>`)
-    return appStream.pipe(res)
+    try {
+      const appName: string = res.locals.appName
+      const appInstance = React.createElement(Html, {appName})
+      const html = renderToStaticMarkup(appInstance)
+      res.status(200)
+      res.type('html')
+      res.send(`<!doctype html>` + html)
+    } catch (err) {
+      logger.error('error rendering component...')
+      return next(err)
+    }
   }
 }
 

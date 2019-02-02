@@ -34,10 +34,11 @@ function config (target: ConfigTargets): IAppWebpackConfig {
   }
 
   const entryFile = target === ConfigTargets.Browser
-    ? './browser' : './index'
+    ? '@protium/app/src/index.web.ts'
+    : '@protium/app/src/App.tsx'
 
   const c: IAppWebpackConfig = {
-    context: Path.join(appContext, 'src'),
+    context: Path.resolve(__dirname, '..'),
     devtool: 'source-map',
     entry: {
       [target]: [entryFile],
@@ -82,9 +83,23 @@ function config (target: ConfigTargets): IAppWebpackConfig {
       alias: {
         'react-native': 'react-native-web',
       },
-      extensions: ['.tsx', '.ts', '.jsx', '.js'],
+      extensions: [
+        '.web.tsx',
+        '.tsx',
+        '.web.ts',
+        '.ts',
+        '.web.jsx',
+        '.jsx',
+        '.web.mjs',
+        '.mjs',
+        '.web.node',
+        '.node',
+        '.web.js',
+        '.js',
+      ],
+      symlinks: false,
     },
-    // stats: 'errors-only',
+    // stats: 'minimal',
   }
 
   if (target === ConfigTargets.Browser) {
@@ -118,6 +133,7 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         }),
         new OfflinePlugin({
           ServiceWorker: {
+            minify: true,
             publicPath: '/sw.js',
             scope: '/',
           },
@@ -149,16 +165,19 @@ function config (target: ConfigTargets): IAppWebpackConfig {
   }
 
   if (target === ConfigTargets.Server) {
-    const modulesDir = Fs.existsSync(Path.resolve('node_modules', 'react'))
-      ? Path.resolve('node_modules')
-      : Path.resolve('../../node_modules')
+    c.devtool = 'cheap-eval-source-map'
     c.target = 'node'
-    c.externals = [nodeExternals({
-      modulesDir,
-      // whitelist: /react-native(?:-web)|style-components\/native/,
-    })]
+    c.externals = module.paths.map((p) => {
+      return nodeExternals({
+        modulesDir: p,
+        whitelist: /@protium\/app|@babel\/runtime/,
+      })
+    })
     c.output!.libraryTarget = 'commonjs2'
-    c.optimization = {minimize: false}
+    c.optimization = {
+      concatenateModules: false,
+      minimize: false,
+    }
     c.plugins!.push(
       new ManifestPlugin({fileName: 'server.manifest.json'}),
     )
@@ -214,6 +233,7 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
   return {
     include: [
       context,
+      /node_modules\/@protium\/app/,
       // /node_modules\/react-native-web/,
       // /node_modules\/styled-components/,
     ],

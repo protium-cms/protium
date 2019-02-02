@@ -1,3 +1,5 @@
+import Fs from 'fs'
+import Path from 'path'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {AppRegistry} from 'react-native-web'
