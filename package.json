@@ -64,6 +64,9 @@
     "node": ">=10",
     "yarn": ">=1.7"
   },
+  "resolutions": {
+    "terser": "3.14.1"
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap --ignore-scripts",
     "build": "lerna run build --parallel",
@@ -78,7 +81,7 @@
     "ci:lint": "tslint --formatters-dir node_modules/tslint-junit-formatter/formatters --format junit --out report-lint.xml -c tslint.json 'packages/**/*.{ts,tsx}'",
     "ci:image:build": "docker build -f ci.Dockerfile -t registry.gitlab.com/protium-network/protium/ci-runner .",
     "ci:image:push": "docker push registry.gitlab.com/protium-network/protium/ci-runner:latest",
-    "ci:test": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci -w 4 --coverage --reporters=default --reporters=jest-junit",
+    "ci:test": "JEST_JUNIT_OUTPUT='./report-unit-tests.xml' JEST_SUITE_NAME='Unit Tests' jest --ci -i --coverage --reporters=default --reporters=jest-junit",
     "debug": "yarn protium debug",
     "dev": "yarn protium dev",
     "dev:test": "yarn test --watch",
