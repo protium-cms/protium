@@ -27,17 +27,9 @@ WORKDIR /app
 # RUN chown -R node:node .
 
 # app dependencies
-COPY package.json .
-COPY lerna.json .
-COPY tsconfig.json .
-COPY yarn.lock .
-COPY patches ./patches
-
-# app code
-COPY packages ./packages
+COPY . .
 
 # install dependencies and compile to js
-RUN yarn global add lerna
 RUN yarn ci:bootstrap
 RUN yarn build
 
