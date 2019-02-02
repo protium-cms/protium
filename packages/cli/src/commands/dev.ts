@@ -40,12 +40,11 @@ export function devServer (extra: string[] = []) {
   ]
 
   return tsNodeDev(script, scriptArgs, nodeArgs, {
-    dedupe: true,
-    deps: 0,
+    debug: false,
+    dedupe: false,
     fork: false,
     ignore: [
-      'server.bundle.js',
-      'manifest.json',
+      Path.join(resolvePkg('@protium/assets'), 'lib'),
     ],
     notify: false,
   })

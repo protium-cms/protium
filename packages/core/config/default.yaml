@@ -1,5 +1,5 @@
 env: development
-logLevel: debug
+logLevel: info
 
 db:
   client: 'sqlite3'

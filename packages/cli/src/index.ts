@@ -12,7 +12,7 @@ const logo = `                  __  _
 /_/`
 
 const description = 'A CLI for interacting with the Protium library'
-const entry = `${Chalk.green(logo)}\n\n${Chalk.gray(description)}\n`
+const entry = `${Chalk.green(logo)}\n`
 
 console.log(entry)
 const program = Yargs

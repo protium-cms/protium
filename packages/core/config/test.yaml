@@ -1,5 +1,5 @@
 env: test
-
+logLevel: warn
 db:
   client: 'sqlite3'
   connection:
