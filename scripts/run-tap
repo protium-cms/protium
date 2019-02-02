@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+const Fs = require('fs')
+const Path = require('path')
+const Readline = require('readline')
+const { spawnSync } = require('child_process')
+const pkg = require('../package.json')
+
+const rl = Readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
+const args = process.argv.slice(2)
+
+if (!args.length) {
+  throw new Error('Must supply at least one command')
+}
+
+run(true).catch(err => {
+  console.log(err)
+  process.exit(1)
+})
+
+async function run(init) {
+  try {
+    if (!init) {
+      await question('Hit return to rerun ' + args.join(' '))
+    }
+    spawnSync('yarn', args, {
+      stdio: 'inherit',
+    })
+  } catch (err) {
+    console.log(err)
+  } finally {
+    run(false)
+  }
+}
+
+function question(qst) {
+  return new Promise((resolve) => {
+    rl.question(qst, (answer) => {
+      resolve(answer)
+      rl.pause()
+    })
+  })
+}

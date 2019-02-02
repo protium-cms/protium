@@ -378,3 +378,10 @@ report*.xml
 # Ignore sketch files
 *.sketch
 .cache-loader
+
+**/.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision

@@ -13,14 +13,13 @@
     "@types/lodash": "^4.14.119",
     "ts-node-dev": "^1.0.0-pre.32",
     "tsconfig-paths": "^3.7.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.4",
+    "expo-cli": "^2.7.0"
   },
   "dependencies": {
     "@protium/api": "^0.0.1",
     "@protium/core": "^0.0.1",
     "@protium/web": "^0.0.1",
-    "@types/node": "^10.12.18",
-    "@types/spdy": "^3.4.4",
     "lodash": "^4.17.11",
     "module-alias": "^2.1.0",
     "resolve-pkg": "^1.0.0",

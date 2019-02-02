@@ -5,7 +5,9 @@
   "dependencies": {
     "@protium/assets": "^0.0.1",
     "@protium/cli": "^0.0.1",
-    "@protium/serve": "^0.0.1"
+    "@protium/serve": "^0.0.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "scripts": {
     "dev": "protium dev",
@@ -13,6 +15,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^24.0.0"
   }
 }
