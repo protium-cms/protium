@@ -14,12 +14,14 @@ variables:
 cache:
   key: $CACHE_KEY
   paths:
+    - ".jest/"
     - "node_modules/"
     - "packages/api/node_modules/"
     - "packages/app/node_modules/"
     - "packages/assets/node_modules/"
     - "packages/cli/node_modules/"
     - "packages/config/node_modules/"
+    - "packages/native/node_modules/"
     - "packages/serve/node_modules/"
     - "packages/web/node_modules/"
 
@@ -37,12 +39,30 @@ stages:
 "Audit Dependencies":
   allow_failure: true
   stage: test
+  cache:
+    key: $CACHE_KEY
+    paths:
+      - "node_modules/"
+      - "packages/api/node_modules/"
+      - "packages/app/node_modules/"
+      - "packages/assets/node_modules/"
+      - "packages/cli/node_modules/"
+      - "packages/config/node_modules/"
+      - "packages/native/node_modules/"
+      - "packages/serve/node_modules/"
+      - "packages/web/node_modules/"
+    policy: pull
   script:
     - yarn audit
 
 "Lint":
   allow_failure: true
   stage: test
+  cache:
+    key: $CACHE_KEY
+    policy: pull
+    paths:
+      - "node_modules/"
   script:
     - yarn ci:lint
   artifacts:
@@ -53,6 +73,19 @@ stages:
   stage: test
   script:
     - yarn ci:test
+  cache:
+    key: $CACHE_KEY
+    paths:
+      - ".jest"
+      - "node_modules/"
+      - "packages/api/node_modules/"
+      - "packages/app/node_modules/"
+      - "packages/assets/node_modules/"
+      - "packages/cli/node_modules/"
+      - "packages/config/node_modules/"
+      - "packages/native/node_modules/"
+      - "packages/serve/node_modules/"
+      - "packages/web/node_modules/"
   artifacts:
     reports:
       junit: report-unit-tests.xml
@@ -61,6 +94,19 @@ stages:
   stage: build
   script:
     - yarn build
+  cache:
+    key: $CACHE_KEY
+    policy: pull
+    paths:
+      - "node_modules/"
+      - "packages/api/node_modules/"
+      - "packages/app/node_modules/"
+      - "packages/assets/node_modules/"
+      - "packages/cli/node_modules/"
+      - "packages/config/node_modules/"
+      - "packages/native/node_modules/"
+      - "packages/serve/node_modules/"
+      - "packages/web/node_modules/"
   artifacts:
     paths:
       - packages/assets/lib/report.html
@@ -68,6 +114,11 @@ stages:
 
 "Build Image":
   stage: deploy
+  cache:
+    key: $CACHE_KEY
+    policy: pull
+    paths:
+      - "node_modules/"
   before_script:
     - echo $GCLOUD_SERVICE_KEY > $HOME/gcloud-service-key.json
     - echo $CI_JOB_TOKEN > $HOME/.ci-job-token
