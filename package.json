@@ -101,6 +101,7 @@
     "sloc": "sloc --exclude node_modules .",
     "sloc:app": "sloc --exclude node_modules packages",
     "start": "yarn protium:dist start",
+    "tap": "./scripts/run-tap",
     "validate": "yarn clean && yarn lint && yarn test && yarn build:dev"
   },
   "workspaces": {
