@@ -93,7 +93,6 @@
     "lint:format": "tsfmt -r",
     "nuke": "yarn clean:modules && rm -f yarn.lock && yarn cache clean",
     "test": "jest",
-    "test:fun": "jest --reporters ./test/nyan-reporter",
     "project:release": "echo 'disabled for now'",
     "project:sync:versions": "lerna-semver-sync",
     "protium": "packages/cli/bin/protium-dev.js",
@@ -102,7 +101,7 @@
     "sloc": "sloc --exclude node_modules .",
     "sloc:app": "sloc --exclude node_modules packages",
     "start": "yarn protium:dist start",
-    "validate": "yarn clean && yarn lint && yarn test && yarn build"
+    "validate": "yarn clean && yarn lint && yarn test && yarn build:dev"
   },
   "workspaces": {
     "packages": [
