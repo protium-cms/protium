@@ -39,13 +39,14 @@ export function devServer (extra: string[] = []) {
     ...extra,
   ]
 
+  const ignorePaths = [
+    Path.join(resolvePkg('@protium/assets'), 'lib'),
+    Path.join(resolvePkg('@protium/app'), 'src'),
+  ]
+
   return tsNodeDev(script, scriptArgs, nodeArgs, {
-    debug: false,
-    dedupe: false,
-    fork: false,
-    ignore: [
-      Path.join(resolvePkg('@protium/assets'), 'lib'),
-    ],
-    notify: false,
+    'dedupe': true,
+    'ignore-watch': ignorePaths,
+    'notify': false,
   })
 }
