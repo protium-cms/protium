@@ -73,8 +73,8 @@ function config (target: ConfigTargets): IAppWebpackConfig {
       hints: false,
     },
     plugins: [
-      // new Webpack.NormalModuleReplacementPlugin(/react-art/,
-      //   Path.resolve(appContext, 'src', 'stubs/react-art.ts')),
+      new Webpack.NormalModuleReplacementPlugin(/react-art/,
+        Path.resolve(appContext, 'src', 'stubs/react-art.ts')),
       new Webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       }),
@@ -157,7 +157,6 @@ function config (target: ConfigTargets): IAppWebpackConfig {
         new ForkTsCheckerWebpackPlugin({
           async: true,
           tsconfig: Path.join(appContext, 'tsconfig.build.json'),
-          // tslint: Path.join('../../tslint.json'),
           workers: ForkTsCheckerWebpackPlugin.ONE_CPU,
         }),
       )
@@ -194,9 +193,6 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
       [
         '@babel/plugin-transform-runtime',
         {
-          // "corejs": false,
-          // "helpers": true,
-          // "regenerator": true,
           useESModules: true,
         },
       ],
@@ -234,8 +230,6 @@ function babelRule (context: string, target: ConfigTargets): Webpack.Rule {
     include: [
       context,
       /node_modules\/@protium\/app/,
-      // /node_modules\/react-native-web/,
-      // /node_modules\/styled-components/,
     ],
     test: /\.(m?j|t)sx?$/,
     use: [
