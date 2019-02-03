@@ -72,7 +72,7 @@
     "bootstrap": "lerna bootstrap --ignore-scripts",
     "build": "lerna run build --parallel",
     "build:dev": "lerna run build --parallel --ignore @protium/assets && lerna run build:dev --scope @protium/assets",
-    "build:image": "yarn clean && docker build .",
+    "build:image": "docker build .",
     "clean": "rimraf \"**/.cache-loader\" \".jest\" \"report*.xml\" \"coverage\" \"packages/*/lib\" \"**/yarn-error.log\"",
     "clean:all": "run-s clean:cache clean:test clean clean:modules",
     "clean:modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
@@ -106,7 +106,7 @@
     "sloc:app": "sloc --exclude node_modules packages",
     "start": "yarn protium:dist start",
     "tap": "./scripts/run-tap",
-    "validate": "yarn clean && yarn lint && yarn test && yarn build:dev"
+    "validate": "yarn lint && yarn test && yarn build:dev"
   },
   "workspaces": {
     "packages": [
